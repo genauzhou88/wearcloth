@@ -1,3 +1,8 @@
+/**
+ * @file  rtctime.c
+ * @brief This is RTC time interface which will keep time in FW.
+ *
+**/
 #include "string.h"
 #include <stdio.h>
 #include "stm32l1xx.h"
