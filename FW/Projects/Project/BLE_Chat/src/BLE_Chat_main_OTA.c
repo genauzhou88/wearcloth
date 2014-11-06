@@ -230,6 +230,7 @@ uint16_t rx_handle;
 #endif 
 
 /* TODO: Need study this function for further use
+* Add more comments from Branch dev
 */
 /* Private function prototypes -----------------------------------------------*/
 void Make_Connection(void);
