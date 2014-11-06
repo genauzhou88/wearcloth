@@ -229,7 +229,8 @@ uint16_t tx_handle;
 uint16_t rx_handle;
 #endif 
 
-
+/* TODO: Need study this function for further use
+*/
 /* Private function prototypes -----------------------------------------------*/
 void Make_Connection(void);
 void User_Process(void);
