@@ -1,120 +1,90 @@
 ###############################################################################
 #                                                                             #
-# IAR ELF Linker V6.60.1.5097/W32 for ARM               31/Oct/2014  20:56:28 #
+# IAR ELF Linker V6.60.1.5097/W32 for ARM               06/Nov/2014  10:25:40 #
 # Copyright 2007-2013 IAR Systems AB.                                         #
 #                                                                             #
-#    Output file  =  C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Exe\BLE_Chat.out                       #
-#    Map file     =  C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\List\BLE_Chat.map                      #
-#    Command line =  C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Obj\BLE_Chat_main.o                    #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Obj\bluenrg_hci.o                      #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Obj\bluenrg_IFR.o                      #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Obj\bluenrg_utils.o                    #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Obj\chat.o                             #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Obj\clock.o                            #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Obj\gatt_db.o                          #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Obj\gp_timer.o                         #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Obj\hal.o                              #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Obj\hci.o                              #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Obj\hw_config.o                        #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Obj\lis3dh_driver.o                    #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Obj\list.o                             #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Obj\misc.o                             #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Obj\osal.o                             #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Obj\otgd_fs_cal.o                      #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Obj\otgd_fs_dev.o                      #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Obj\otgd_fs_int.o                      #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Obj\otgd_fs_pcd.o                      #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Obj\rtctime.o                          #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Obj\SDK_EVAL_Config.o                  #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#    Output file  =  C:\Wearable\FW\Projects\Project\BLE_Chat\EWARM\Client\Ex #
+#                    e\BLE_Chat.out                                           #
+#    Map file     =  C:\Wearable\FW\Projects\Project\BLE_Chat\EWARM\Client\Li #
+#                    st\BLE_Chat.map                                          #
+#    Command line =  C:\Wearable\FW\Projects\Project\BLE_Chat\EWARM\Client\Ob #
+#                    j\BLE_Chat_main.o C:\Wearable\FW\Projects\Project\BLE_Ch #
+#                    at\EWARM\Client\Obj\bluenrg_hci.o                        #
+#                    C:\Wearable\FW\Projects\Project\BLE_Chat\EWARM\Client\Ob #
+#                    j\bluenrg_IFR.o C:\Wearable\FW\Projects\Project\BLE_Chat #
+#                    \EWARM\Client\Obj\bluenrg_utils.o                        #
+#                    C:\Wearable\FW\Projects\Project\BLE_Chat\EWARM\Client\Ob #
+#                    j\chat.o C:\Wearable\FW\Projects\Project\BLE_Chat\EWARM\ #
+#                    Client\Obj\clock.o C:\Wearable\FW\Projects\Project\BLE_C #
+#                    hat\EWARM\Client\Obj\gatt_db.o                           #
+#                    C:\Wearable\FW\Projects\Project\BLE_Chat\EWARM\Client\Ob #
+#                    j\gp_timer.o C:\Wearable\FW\Projects\Project\BLE_Chat\EW #
+#                    ARM\Client\Obj\hal.o C:\Wearable\FW\Projects\Project\BLE #
+#                    _Chat\EWARM\Client\Obj\hci.o                             #
+#                    C:\Wearable\FW\Projects\Project\BLE_Chat\EWARM\Client\Ob #
+#                    j\hw_config.o C:\Wearable\FW\Projects\Project\BLE_Chat\E #
+#                    WARM\Client\Obj\lis3dh_driver.o                          #
+#                    C:\Wearable\FW\Projects\Project\BLE_Chat\EWARM\Client\Ob #
+#                    j\list.o C:\Wearable\FW\Projects\Project\BLE_Chat\EWARM\ #
+#                    Client\Obj\misc.o C:\Wearable\FW\Projects\Project\BLE_Ch #
+#                    at\EWARM\Client\Obj\osal.o C:\Wearable\FW\Projects\Proje #
+#                    ct\BLE_Chat\EWARM\Client\Obj\otgd_fs_cal.o               #
+#                    C:\Wearable\FW\Projects\Project\BLE_Chat\EWARM\Client\Ob #
+#                    j\otgd_fs_dev.o C:\Wearable\FW\Projects\Project\BLE_Chat #
+#                    \EWARM\Client\Obj\otgd_fs_int.o                          #
+#                    C:\Wearable\FW\Projects\Project\BLE_Chat\EWARM\Client\Ob #
+#                    j\otgd_fs_pcd.o C:\Wearable\FW\Projects\Project\BLE_Chat #
+#                    \EWARM\Client\Obj\rtctime.o                              #
+#                    C:\Wearable\FW\Projects\Project\BLE_Chat\EWARM\Client\Ob #
+#                    j\SDK_EVAL_Config.o C:\Wearable\FW\Projects\Project\BLE_ #
 #                    Chat\EWARM\Client\Obj\SDK_EVAL_Io.o                      #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Obj\SDK_EVAL_Spi_Driver.o              #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Obj\startup_stm32l1xx_md.o             #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Obj\stm32l1xx_exti.o                   #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Obj\stm32l1xx_flash.o                  #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Obj\stm32l1xx_flash_ramfunc.o          #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Obj\stm32l1xx_gpio.o                   #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Obj\stm32l1xx_i2c.o                    #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Obj\stm32l1xx_it.o                     #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Obj\stm32l1xx_pwr.o                    #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Obj\stm32l1xx_rcc.o                    #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Obj\stm32l1xx_rtc.o                    #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Obj\stm32l1xx_spi.o                    #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Obj\stm32l1xx_syscfg.o                 #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Obj\stm32l1xx_systick.o                #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Obj\stm32l1xx_tim.o                    #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Obj\stm32l1xx_usart.o                  #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    C:\Wearable\FW\Projects\Project\BLE_Chat\EWARM\Client\Ob #
+#                    j\SDK_EVAL_Spi_Driver.o C:\Wearable\FW\Projects\Project\ #
+#                    BLE_Chat\EWARM\Client\Obj\startup_stm32l1xx_md.o         #
+#                    C:\Wearable\FW\Projects\Project\BLE_Chat\EWARM\Client\Ob #
+#                    j\stm32l1xx_exti.o C:\Wearable\FW\Projects\Project\BLE_C #
+#                    hat\EWARM\Client\Obj\stm32l1xx_flash.o                   #
+#                    C:\Wearable\FW\Projects\Project\BLE_Chat\EWARM\Client\Ob #
+#                    j\stm32l1xx_flash_ramfunc.o                              #
+#                    C:\Wearable\FW\Projects\Project\BLE_Chat\EWARM\Client\Ob #
+#                    j\stm32l1xx_gpio.o C:\Wearable\FW\Projects\Project\BLE_C #
+#                    hat\EWARM\Client\Obj\stm32l1xx_i2c.o                     #
+#                    C:\Wearable\FW\Projects\Project\BLE_Chat\EWARM\Client\Ob #
+#                    j\stm32l1xx_it.o C:\Wearable\FW\Projects\Project\BLE_Cha #
+#                    t\EWARM\Client\Obj\stm32l1xx_pwr.o                       #
+#                    C:\Wearable\FW\Projects\Project\BLE_Chat\EWARM\Client\Ob #
+#                    j\stm32l1xx_rcc.o C:\Wearable\FW\Projects\Project\BLE_Ch #
+#                    at\EWARM\Client\Obj\stm32l1xx_rtc.o                      #
+#                    C:\Wearable\FW\Projects\Project\BLE_Chat\EWARM\Client\Ob #
+#                    j\stm32l1xx_spi.o C:\Wearable\FW\Projects\Project\BLE_Ch #
+#                    at\EWARM\Client\Obj\stm32l1xx_syscfg.o                   #
+#                    C:\Wearable\FW\Projects\Project\BLE_Chat\EWARM\Client\Ob #
+#                    j\stm32l1xx_systick.o C:\Wearable\FW\Projects\Project\BL #
+#                    E_Chat\EWARM\Client\Obj\stm32l1xx_tim.o                  #
+#                    C:\Wearable\FW\Projects\Project\BLE_Chat\EWARM\Client\Ob #
+#                    j\stm32l1xx_usart.o C:\Wearable\FW\Projects\Project\BLE_ #
 #                    Chat\EWARM\Client\Obj\system_stm32l1xx.o                 #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Obj\usb_core.o                         #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Obj\usb_desc.o                         #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Obj\usb_endp.o                         #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Obj\usb_init.o                         #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Obj\usb_int.o                          #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Obj\usb_istr.o                         #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Obj\usb_mem.o                          #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Obj\usb_prop.o                         #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Obj\usb_pwr.o                          #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Obj\usb_regs.o                         #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Obj\usb_sil.o -o                       #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\Exe\BLE_Chat.out --map                 #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\Client\List\BLE_Chat.map --config             #
-#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
-#                    Chat\EWARM\stm32l1xx_flash.icf --semihosting --entry     #
-#                    __iar_program_start --redirect                           #
-#                    __iar_sh_stdout=__iar_sh_stdout_swo --vfe                #
+#                    C:\Wearable\FW\Projects\Project\BLE_Chat\EWARM\Client\Ob #
+#                    j\usb_core.o C:\Wearable\FW\Projects\Project\BLE_Chat\EW #
+#                    ARM\Client\Obj\usb_desc.o C:\Wearable\FW\Projects\Projec #
+#                    t\BLE_Chat\EWARM\Client\Obj\usb_endp.o                   #
+#                    C:\Wearable\FW\Projects\Project\BLE_Chat\EWARM\Client\Ob #
+#                    j\usb_init.o C:\Wearable\FW\Projects\Project\BLE_Chat\EW #
+#                    ARM\Client\Obj\usb_int.o C:\Wearable\FW\Projects\Project #
+#                    \BLE_Chat\EWARM\Client\Obj\usb_istr.o                    #
+#                    C:\Wearable\FW\Projects\Project\BLE_Chat\EWARM\Client\Ob #
+#                    j\usb_mem.o C:\Wearable\FW\Projects\Project\BLE_Chat\EWA #
+#                    RM\Client\Obj\usb_prop.o C:\Wearable\FW\Projects\Project #
+#                    \BLE_Chat\EWARM\Client\Obj\usb_pwr.o                     #
+#                    C:\Wearable\FW\Projects\Project\BLE_Chat\EWARM\Client\Ob #
+#                    j\usb_regs.o C:\Wearable\FW\Projects\Project\BLE_Chat\EW #
+#                    ARM\Client\Obj\usb_sil.o -o                              #
+#                    C:\Wearable\FW\Projects\Project\BLE_Chat\EWARM\Client\Ex #
+#                    e\BLE_Chat.out --map C:\Wearable\FW\Projects\Project\BLE #
+#                    _Chat\EWARM\Client\List\BLE_Chat.map --config            #
+#                    C:\Wearable\FW\Projects\Project\BLE_Chat\EWARM\stm32l1xx #
+#                    _flash.icf --semihosting --entry __iar_program_start     #
+#                    --redirect __iar_sh_stdout=__iar_sh_stdout_swo --vfe     #
 #                                                                             #
 #                                                                             #
 ###############################################################################
@@ -329,7 +299,7 @@ Copy (__iar_copy_init3)
 
     Module                  ro code  ro data  rw data
     ------                  -------  -------  -------
-C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_Chat\EWARM\Client\Obj: [1]
+C:\Wearable\FW\Projects\Project\BLE_Chat\EWARM\Client\Obj: [1]
     BLE_Chat_main.o           2 356       28       28
     SDK_EVAL_Config.o           200                 1
     SDK_EVAL_Io.o                32                 4
@@ -833,7 +803,7 @@ wInterrupt_Mask         0x20000daa    0x2  Data  Gb  usb_init.o [1]
 wIstr                   0x20000dd2    0x2  Data  Gb  usb_istr.o [1]
 
 
-[1] = C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_Chat\EWARM\Client\Obj
+[1] = C:\Wearable\FW\Projects\Project\BLE_Chat\EWARM\Client\Obj
 [2] = command line
 [3] = dl7M_tln.a
 [4] = rt7M_tl.a

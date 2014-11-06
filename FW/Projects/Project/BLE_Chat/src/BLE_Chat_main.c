@@ -467,13 +467,13 @@ int main(void)
     { 
         HCI_Process();
         User_Process();
-        /*
+#if TWO_NODES //only try to connect 2nd nodes when user want to
         if (bServerConnected) //only make connection when Server1 is connectted
         {
           //PRINTF("Start to connect with Server_2\n");
           User_Process2();
         }
-        */
+#endif
     }
     }
 
