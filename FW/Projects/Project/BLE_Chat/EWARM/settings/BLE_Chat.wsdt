@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<Workspace>
+  <ConfigDictionary>
+    
+  <CurrentConfigs><Project>BLE_Chat/Server</Project></CurrentConfigs></ConfigDictionary>
+  <Desktop>
+    <Static>
+      <Workspace>
+        <ColumnWidths>
+          
+          
+          
+          
+        <Column0>264</Column0><Column1>31</Column1><Column2>71</Column2><Column3>0</Column3></ColumnWidths>
+      </Workspace>
+      <Build>
+        <PreferedWindows>
+          <Position>3</Position>
+          <ScreenPosX>0</ScreenPosX>
+          <ScreenPosY>0</ScreenPosY>
+          <Windows>
+            <Window>
+              <Factory>Find-All-References</Factory>
+            </Window>
+          </Windows>
+        </PreferedWindows>
+        
+        
+        
+        
+      <ColumnWidth0>20</ColumnWidth0><ColumnWidth1>1107</ColumnWidth1><ColumnWidth2>295</ColumnWidth2><ColumnWidth3>73</ColumnWidth3></Build>
+      <Find-All-References>
+        
+        
+        
+      <ColumnWidth0>529</ColumnWidth0><ColumnWidth1>75</ColumnWidth1><ColumnWidth2>908</ColumnWidth2></Find-All-References>
+      <PROJECT_GUI_CALL_GRAPH>
+        <col-names>
+          <item>File</item>
+          <item>Function</item>
+          <item>Line</item>
+        </col-names>
+        <col-widths>
+          <item>200</item>
+          <item>700</item>
+          <item>100</item>
+        </col-widths>
+        <PreferedWindows>
+          <Position>3</Position>
+          <ScreenPosX>0</ScreenPosX>
+          <ScreenPosY>0</ScreenPosY>
+          <Windows/>
+        </PreferedWindows>
+      </PROJECT_GUI_CALL_GRAPH>
+    <Find-All-Declarations><ColumnWidth0>529</ColumnWidth0><ColumnWidth1>75</ColumnWidth1><ColumnWidth2>908</ColumnWidth2></Find-All-Declarations><Select-Ambiguous-Definitions><ColumnWidth0>529</ColumnWidth0><ColumnWidth1>75</ColumnWidth1><ColumnWidth2>908</ColumnWidth2></Select-Ambiguous-Definitions></Static>
+    <Windows>
+      
+      
+    <Wnd1>
+        <Tabs>
+          <Tab>
+            <Identity>TabID-15422-12136</Identity>
+            <TabName>Workspace</TabName>
+            <Factory>Workspace</Factory>
+            <Session>
+              
+            <NodeDict><ExpandedNode>BLE_Chat</ExpandedNode><ExpandedNode>BLE_Chat/CMSIS</ExpandedNode><ExpandedNode>BLE_Chat/EWARM</ExpandedNode><ExpandedNode>BLE_Chat/Libraries</ExpandedNode><ExpandedNode>BLE_Chat/Output</ExpandedNode><ExpandedNode>BLE_Chat/STM32L1xx_StdPeriph_Driver</ExpandedNode><ExpandedNode>BLE_Chat/User</ExpandedNode></NodeDict></Session>
+          </Tab>
+        </Tabs>
+        
+      <SelectedTab>0</SelectedTab></Wnd1><Wnd3>
+        <Tabs>
+          <Tab>
+            <Identity>TabID-28332-30912</Identity>
+            <TabName>Find All References</TabName>
+            <Factory>Find-All-References</Factory>
+            <Session/>
+          </Tab>
+          <Tab>
+            <Identity>TabID-16205-4512</Identity>
+            <TabName>Build</TabName>
+            <Factory>Build</Factory>
+            <Session/>
+          </Tab>
+        <Tab><Identity>TabID-14684-18832</Identity><TabName>Find All Declarations</TabName><Factory>Find-All-Declarations</Factory><Session/></Tab><Tab><Identity>TabID-1561-10668</Identity><TabName>Ambiguous Definitions</TabName><Factory>Select-Ambiguous-Definitions</Factory><Session/></Tab></Tabs>
+        
+      <SelectedTab>1</SelectedTab></Wnd3></Windows>
+    <Editor>
+      
+      
+      
+      
+    <Pane><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\src\BLE_Chat_main.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>823</YPos2><SelStart2>21611</SelStart2><SelEnd2>21611</SelEnd2></Tab><ActiveTab>0</ActiveTab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\src\chat.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>153</YPos2><SelStart2>3368</SelStart2><SelEnd2>3444</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\src\rtctime.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>78</YPos2><SelStart2>2683</SelStart2><SelEnd2>2695</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\..\..\platform\STM32L1XX\Libraries\STM32L1xx_StdPeriph_Driver\inc\stm32l1xx_rtc.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>64</YPos2><SelStart2>3076</SelStart2><SelEnd2>3076</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\..\..\..\..\..\..\..\Program Files (x86)\IAR Systems\Embedded Workbench 6.5\arm\inc\c\string.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>126</YPos2><SelStart2>300</SelStart2><SelEnd2>300</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\..\..\platform\STM32L1XX\Libraries\STM32L1xx_StdPeriph_Driver\src\stm32l1xx_rtc.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>863</YPos2><SelStart2>34072</SelStart2><SelEnd2>34137</SelEnd2></Tab></Pane><ActivePane>0</ActivePane><Sizes><Pane><X>1000000</X><Y>1000000</Y></Pane></Sizes><SplitMode>1</SplitMode></Editor>
+    <Positions>
+      
+      
+      
+      
+      
+    <Top><Row0><Sizes><Toolbar-034f3190><key>iaridepm.enu1</key></Toolbar-034f3190></Sizes></Row0></Top><Left><Row0><Sizes><Wnd1><Rect><Top>-2</Top><Left>-2</Left><Bottom>425</Bottom><Right>403</Right><x>-2</x><y>-2</y><xscreen>148</xscreen><yscreen>159</yscreen><sizeHorzCX>130282</sizeHorzCX><sizeHorzCY>254808</sizeHorzCY><sizeVertCX>356514</sizeVertCX><sizeVertCY>684295</sizeVertCY></Rect></Wnd1></Sizes></Row0></Left><Right><Row0><Sizes/></Row0></Right><Bottom><Row0><Sizes><Wnd3><Rect><Top>-2</Top><Left>-2</Left><Bottom>154</Bottom><Right>1138</Right><x>-2</x><y>-2</y><xscreen>1140</xscreen><yscreen>156</yscreen><sizeHorzCX>1003521</sizeHorzCX><sizeHorzCY>250000</sizeHorzCY><sizeVertCX>130282</sizeVertCX><sizeVertCY>254808</sizeVertCY></Rect></Wnd3></Sizes></Row0></Bottom><Float><Sizes/></Float></Positions>
+  </Desktop>
+</Workspace>
+
+

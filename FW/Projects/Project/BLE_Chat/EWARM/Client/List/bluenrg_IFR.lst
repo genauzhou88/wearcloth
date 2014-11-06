@@ -1,0 +1,361 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.60.1.5097/W32 for ARM      09/Oct/2014  10:33:24 #
+# Copyright 1999-2013 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  C:\Users\FredZhou\Documents\Origin\Projects\Bluetooth    #
+#                    LE\SimpleBlueNRG_HCI\hci\controller\bluenrg_IFR.c        #
+#    Command line =  "C:\Users\FredZhou\Documents\Origin\Projects\Bluetooth   #
+#                    LE\SimpleBlueNRG_HCI\hci\controller\bluenrg_IFR.c" -D    #
+#                    USE_STDPERIPH_DRIVER -D STM32L1XX_MD -D                  #
+#                    SYSCLK_FREQ_HSI_32MHz -D ENABLE_USB -D                   #
+#                    ENABLE_USB_PRINTF -D CLIENT=1 -D DEBUG -D                #
+#                    BLUENRG_CONFIG=BLUENRG_16_MHZ -lcN                       #
+#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\EWARM\Client\List\ --diag_suppress Pa050 -o         #
+#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\EWARM\Client\Obj\ --debug --endian=little           #
+#                    --cpu=Cortex-M3 -e --fpu=None --dlib_config "C:\Program  #
+#                    Files (x86)\IAR Systems\Embedded Workbench               #
+#                    6.5\arm\INC\c\DLib_Config_Normal.h" -I                   #
+#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\EWARM\..\inc\ -I "C:\Users\FredZhou\Documents\Origi #
+#                    n\Projects\Project\BLE_Chat\EWARM\..\..\..\Bluetooth     #
+#                    LE\SimpleBlueNRG_HCI\" -I "C:\Users\FredZhou\Documents\O #
+#                    rigin\Projects\Project\BLE_Chat\EWARM\..\..\..\Bluetooth #
+#                     LE\SimpleBlueNRG_HCI\includes\" -I                      #
+#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\EWARM\..\..\..\platform\STM32L1XX\ -I               #
+#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\EWARM\..\..\..\platform\STM32L1XX\Libraries\ -I     #
+#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\EWARM\..\..\..\platform\STM32L1XX\Libraries\CMSIS\C #
+#                    M3\DeviceSupport\ST\STM32L1xx\ -I                        #
+#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\EWARM\..\..\..\platform\STM32L1XX\Libraries\STM32_U #
+#                    SB-FS-Device_Driver\inc\ -I                              #
+#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\EWARM\..\..\..\platform\STM32L1XX\Libraries\STM32L1 #
+#                    xx_StdPeriph_Driver\inc\ -I                              #
+#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\EWARM\..\..\..\platform\STM32L1XX\Libraries\I2C\inc #
+#                    \ -I C:\Users\FredZhou\Documents\Origin\Projects\Project #
+#                    \BLE_Chat\EWARM\..\..\..\platform\STM32L1XX\Libraries\LI #
+#                    S3DH\inc\ -I C:\Users\FredZhou\Documents\Origin\Projects #
+#                    \Project\BLE_Chat\EWARM\..\..\..\platform\STM32L1XX\Libr #
+#                    aries\STLM75\inc\ -I C:\Users\FredZhou\Documents\Origin\ #
+#                    Projects\Project\BLE_Chat\EWARM\..\..\..\platform\STM32L #
+#                    1XX\Libraries\HTS221\inc\ -I                             #
+#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\EWARM\..\..\..\platform\STM32L1XX\Libraries\LPS25H\ #
+#                    inc\ -I C:\Users\FredZhou\Documents\Origin\Projects\Proj #
+#                    ect\BLE_Chat\EWARM\..\..\..\platform\STM32L1XX\Libraries #
+#                    \SDK_Eval_STM32L\inc\ -Ohs --use_c++_inline -I           #
+#                    "C:\Program Files (x86)\IAR Systems\Embedded Workbench   #
+#                    6.5\arm\CMSIS\Include\"                                  #
+#    List file    =  C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\EWARM\Client\List\bluenrg_IFR.lst                   #
+#    Object file  =  C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\EWARM\Client\Obj\bluenrg_IFR.o                      #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Users\FredZhou\Documents\Origin\Projects\Bluetooth LE\SimpleBlueNRG_HCI\hci\controller\bluenrg_IFR.c
+      1          
+      2          #include "hal.h"
+      3          #include "hal_types.h"
+      4          #include "ble_status.h"
+      5          #include "bluenrg_hci.h"
+      6          #include "bluenrg_utils.h"
+      7          #include "SDK_EVAL_Spi_Driver.h"
+      8          
+      9          /************** Do not change this define section ************/
+     10          
+     11          #define BLUENRG_32_MHZ          1
+     12          #define BLUENRG_32_MHZ_RO       2
+     13          #define BLUENRG_16_MHZ          3
+     14          #define BLUENRG_16_MHZ_RO       4
+     15          
+     16          #define MASTER_SCA_500ppm       0 // 251 ppm to 500 ppm
+     17          #define MASTER_SCA_250ppm       1 // 151 ppm to 250 ppm
+     18          #define MASTER_SCA_150ppm       2 // 101 ppm to 150 ppm
+     19          #define MASTER_SCA_100ppm       3 // 76 ppm to 100 ppm
+     20          #define MASTER_SCA_75ppm        4 // 51 ppm to 75 ppm
+     21          #define MASTER_SCA_50ppm        5 // 31 ppm to 50 ppm
+     22          #define MASTER_SCA_30ppm        6 // 21 ppm to 30 ppm
+     23          #define MASTER_SCA_20ppm        7 // 0 ppm to 20 ppm
+     24          
+     25          /************************************************************/
+     26          
+     27          
+     28          /************** Definitions that can be changed. ************/
+     29          
+     30          #define STACK_MODE              3
+     31          #define SLAVE_SCA_PPM           100
+     32          #define MASTER_SCA              MASTER_SCA_100ppm
+     33          #define HS_STARTUP_TIME_US      512
+     34          #define DAY                     27
+     35          #define MONTH                   01
+     36          #define YEAR                    14
+     37          
+     38          /************************************************************/
+     39          
+     40          #if BLUENRG_CONFIG == BLUENRG_32_MHZ
+     41          
+     42          const IFR_config_TypeDef IFR_config = {
+     43            0x02,0x3A,0x5C,0x02,
+     44            0x34,0x5F,0x02,0x39,
+     45            0xA2,0x00,0xFF,0xFF,
+     46            0xFF,0xFF,0xFF,0xFF,
+     47            0xFF,0xFF,0xFF,0xFF,
+     48            0xFF,0xFF,0xFF,0xFF,
+     49            0xFF,0xFF,0xFF,0xFF,
+     50            0xFF,0xFF,0xFF,0xFF,
+     51            0xFF,0xFF,0xFF,0xFF,
+     52            0xFF,0xFF,0xFF,0xFF,
+     53            0xFF,0xFF,0xFF,0xFF,
+     54            0xFF,0xFF,0xFF,0xFF,
+     55            0xFF,0xFF,0xFF,0xFF,
+     56            0xFF,0xFF,0xFF,0xFF,
+     57            0xFF,0xFF,0xFF,0xFF,
+     58            0xFF,0xFF,0xFF,0xFF,
+     59            
+     60            0x02,0x1C,0x53,0x00,
+     61            0xFF,0xFF,0xFF,0xFF,
+     62            0xFF,0xFF,0xFF,0xFF,
+     63            0xFF,0xFF,0xFF,0xFF,
+     64            0xFF,0xFF,0xFF,0xFF,
+     65            0xFF,0xFF,0xFF,0xFF,
+     66            0xFF,0xFF,0xFF,0xFF,
+     67            0xFF,0xFF,0xFF,0xFF,
+     68            0xFF,0xFF,0xFF,0xFF,
+     69            0xFF,0xFF,0xFF,0xFF,
+     70            0xFF,0xFF,0xFF,0xFF,
+     71            0xFF,0xFF,0xFF,0xFF,
+     72            0xFF,0xFF,0xFF,0xFF,
+     73            0xFF,0xFF,0xFF,0xFF,
+     74            0xFF,0xFF,0xFF,0xFF,
+     75            0xFF,0xFF,0xFF,0xFF,
+     76            
+     77            STACK_MODE,
+     78            0xFF,0xFF,0xFF,
+     79            0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,
+     80            htobl(0x00190000),
+     81            htobl(0x0028F5C2),
+     82            htobs(SLAVE_SCA_PPM),
+     83            MASTER_SCA,
+     84            0xFF,
+     85            htobs(FROM_US_TO_SYS_TIME(HS_STARTUP_TIME_US)),
+     86            0xEF,
+     87            0x5F,
+     88            0xFF,0xFF,0xFF,
+     89            0xFF,
+     90            0xFF,   
+     91            INT_TO_BCD(YEAR),INT_TO_BCD(MONTH),INT_TO_BCD(DAY),
+     92            0xFFFFFFFF,  
+     93            0xFFFFFFFF,
+     94            0xFFFFFFFF,
+     95            0xFFFFFFFF,
+     96            0xFFFFFFFF
+     97          };
+     98          
+     99          #elif BLUENRG_CONFIG == BLUENRG_32_MHZ_RO
+    100          
+    101          const IFR_config_TypeDef IFR_config = {
+    102            0x02,0x3A,0x5C,0x02,
+    103            0x34,0x1F,0x02,0x39,
+    104            0xA2,0x00,0xFF,0xFF,
+    105            0xFF,0xFF,0xFF,0xFF,
+    106            0xFF,0xFF,0xFF,0xFF,
+    107            0xFF,0xFF,0xFF,0xFF,
+    108            0xFF,0xFF,0xFF,0xFF,
+    109            0xFF,0xFF,0xFF,0xFF,
+    110            0xFF,0xFF,0xFF,0xFF,
+    111            0xFF,0xFF,0xFF,0xFF,
+    112            0xFF,0xFF,0xFF,0xFF,
+    113            0xFF,0xFF,0xFF,0xFF,
+    114            0xFF,0xFF,0xFF,0xFF,
+    115            0xFF,0xFF,0xFF,0xFF,
+    116            0xFF,0xFF,0xFF,0xFF,
+    117            0xFF,0xFF,0xFF,0xFF,
+    118            
+    119            0x02,0x1C,0x53,0x00,
+    120            0xFF,0xFF,0xFF,0xFF,
+    121            0xFF,0xFF,0xFF,0xFF,
+    122            0xFF,0xFF,0xFF,0xFF,
+    123            0xFF,0xFF,0xFF,0xFF,
+    124            0xFF,0xFF,0xFF,0xFF,
+    125            0xFF,0xFF,0xFF,0xFF,
+    126            0xFF,0xFF,0xFF,0xFF,
+    127            0xFF,0xFF,0xFF,0xFF,
+    128            0xFF,0xFF,0xFF,0xFF,
+    129            0xFF,0xFF,0xFF,0xFF,
+    130            0xFF,0xFF,0xFF,0xFF,
+    131            0xFF,0xFF,0xFF,0xFF,
+    132            0xFF,0xFF,0xFF,0xFF,
+    133            0xFF,0xFF,0xFF,0xFF,
+    134            0xFF,0xFF,0xFF,0xFF,
+    135            
+    136            STACK_MODE,
+    137            0xFF,0xFF,0xFF,
+    138            0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,
+    139            0xFFFFFFFF,
+    140            0xFFFFFFFF,
+    141            htobs(0x01F4), 
+    142            0x00,
+    143            0xFF,
+    144            htobs(FROM_US_TO_SYS_TIME(HS_STARTUP_TIME_US)),
+    145            0xFF,
+    146            0x5F,
+    147            0xFF,0xFF,0xFF,
+    148            0xFF,
+    149            0xFF,   
+    150            INT_TO_BCD(YEAR),INT_TO_BCD(MONTH),INT_TO_BCD(DAY),
+    151            0xFFFFFFFF,  
+    152            0xFFFFFFFF,
+    153            0xFFFFFFFF,
+    154            0xFFFFFFFF,
+    155            0xFFFFFFFF  
+    156          };
+    157          
+    158          #elif BLUENRG_CONFIG == BLUENRG_16_MHZ
+    159          
+    160          const IFR_config_TypeDef IFR_config = {
+    161            0x02,0x34,0x5B,0x03,
+    162            0x39,0xA2,0x58,0x00,
+    163            0xFF,0xFF,0xFF,0xFF,
+    164            0xFF,0xFF,0xFF,0xFF,
+    165            0xFF,0xFF,0xFF,0xFF,
+    166            0xFF,0xFF,0xFF,0xFF,
+    167            0xFF,0xFF,0xFF,0xFF,
+    168            0xFF,0xFF,0xFF,0xFF,
+    169            0xFF,0xFF,0xFF,0xFF,
+    170            0xFF,0xFF,0xFF,0xFF,
+    171            0xFF,0xFF,0xFF,0xFF,
+    172            0xFF,0xFF,0xFF,0xFF,
+    173            0xFF,0xFF,0xFF,0xFF,
+    174            0xFF,0xFF,0xFF,0xFF,
+    175            0xFF,0xFF,0xFF,0xFF,
+    176            0xFF,0xFF,0xFF,0xFF,
+    177            
+    178            0x02,0x1C,0x53,0x00,
+    179            0xFF,0xFF,0xFF,0xFF,
+    180            0xFF,0xFF,0xFF,0xFF,
+    181            0xFF,0xFF,0xFF,0xFF,
+    182            0xFF,0xFF,0xFF,0xFF,
+    183            0xFF,0xFF,0xFF,0xFF,
+    184            0xFF,0xFF,0xFF,0xFF,
+    185            0xFF,0xFF,0xFF,0xFF,
+    186            0xFF,0xFF,0xFF,0xFF,
+    187            0xFF,0xFF,0xFF,0xFF,
+    188            0xFF,0xFF,0xFF,0xFF,
+    189            0xFF,0xFF,0xFF,0xFF,
+    190            0xFF,0xFF,0xFF,0xFF,
+    191            0xFF,0xFF,0xFF,0xFF,
+    192            0xFF,0xFF,0xFF,0xFF,
+    193            0xFF,0xFF,0xFF,0xFF,
+    194            
+    195            STACK_MODE,
+    196            0xFF,0xFF,0xFF,
+    197            0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,
+    198            htobl(0x00190000),
+    199            htobl(0x0028F5C2),
+    200            htobs(SLAVE_SCA_PPM), 
+    201            MASTER_SCA,
+    202            0xFF,
+    203            htobs(FROM_US_TO_SYS_TIME(HS_STARTUP_TIME_US)),
+    204            0xEE,
+    205            0x5F,
+    206            0xFF,0xFF,0xFF,
+    207            0xFF,
+    208            0xFF,   
+    209            INT_TO_BCD(YEAR),INT_TO_BCD(MONTH),INT_TO_BCD(DAY),
+    210            0xFFFFFFFF,  
+    211            0xFFFFFFFF,
+    212            0xFFFFFFFF,
+    213            0xFFFFFFFF,
+    214            0xFFFFFFFF
+    215          
+    216          };
+    217          
+    218          #elif BLUENRG_CONFIG == BLUENRG_16_MHZ_RO
+    219          
+    220          const IFR_config_TypeDef IFR_config = {
+    221            0x02,0x34,0x1B,0x03,
+    222            0x39,0xA2,0x58,0x00,
+    223            0xFF,0xFF,0xFF,0xFF,
+    224            0xFF,0xFF,0xFF,0xFF,
+    225            0xFF,0xFF,0xFF,0xFF,
+    226            0xFF,0xFF,0xFF,0xFF,
+    227            0xFF,0xFF,0xFF,0xFF,
+    228            0xFF,0xFF,0xFF,0xFF,
+    229            0xFF,0xFF,0xFF,0xFF,
+    230            0xFF,0xFF,0xFF,0xFF,
+    231            0xFF,0xFF,0xFF,0xFF,
+    232            0xFF,0xFF,0xFF,0xFF,
+    233            0xFF,0xFF,0xFF,0xFF,
+    234            0xFF,0xFF,0xFF,0xFF,
+    235            0xFF,0xFF,0xFF,0xFF,
+    236            0xFF,0xFF,0xFF,0xFF,
+    237            
+    238            0x02,0x1C,0x53,0x00,
+    239            0xFF,0xFF,0xFF,0xFF,
+    240            0xFF,0xFF,0xFF,0xFF,
+    241            0xFF,0xFF,0xFF,0xFF,
+    242            0xFF,0xFF,0xFF,0xFF,
+    243            0xFF,0xFF,0xFF,0xFF,
+    244            0xFF,0xFF,0xFF,0xFF,
+    245            0xFF,0xFF,0xFF,0xFF,
+    246            0xFF,0xFF,0xFF,0xFF,
+    247            0xFF,0xFF,0xFF,0xFF,
+    248            0xFF,0xFF,0xFF,0xFF,
+    249            0xFF,0xFF,0xFF,0xFF,
+    250            0xFF,0xFF,0xFF,0xFF,
+    251            0xFF,0xFF,0xFF,0xFF,
+    252            0xFF,0xFF,0xFF,0xFF,
+    253            0xFF,0xFF,0xFF,0xFF,
+    254            
+    255            STACK_MODE,
+    256            0xFF,0xFF,0xFF,
+    257            0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,
+    258            0xFFFFFFFF,
+    259            0xFFFFFFFF,
+    260            htobs(0x01F4), 
+    261            0x00,
+    262            0xFF,
+    263            htobs(FROM_US_TO_SYS_TIME(HS_STARTUP_TIME_US)),
+    264            0xFE,
+    265            0x5F,
+    266            0xFF,0xFF,0xFF,
+    267            0xFF,
+    268            0xFF,   
+    269            INT_TO_BCD(YEAR),INT_TO_BCD(MONTH),INT_TO_BCD(DAY),
+    270            0xFFFFFFFF,  
+    271            0xFFFFFFFF,
+    272            0xFFFFFFFF,
+    273            0xFFFFFFFF,
+    274            0xFFFFFFFF  
+    275          };
+    276          
+    277          #else
+    278          #warning BLUENRG_CONFIG not valid
+    279          #endif
+    280          
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+     192  IFR_config
+
+ 
+ 192 bytes in section .rodata
+ 
+ 192 bytes of CONST memory
+
+Errors: none
+Warnings: none

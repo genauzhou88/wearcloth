@@ -1,0 +1,526 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.60.1.5097/W32 for ARM      31/Oct/2014  21:00:31 #
+# Copyright 1999-2013 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  C:\Users\FredZhou\Documents\Origin\Projects\Bluetooth    #
+#                    LE\SimpleBlueNRG_HCI\hci\controller\bluenrg_utils.c      #
+#    Command line =  "C:\Users\FredZhou\Documents\Origin\Projects\Bluetooth   #
+#                    LE\SimpleBlueNRG_HCI\hci\controller\bluenrg_utils.c" -D  #
+#                    USE_STDPERIPH_DRIVER -D STM32L1XX_MD -D                  #
+#                    SYSCLK_FREQ_HSI_32MHz -D ENABLE_USB -D                   #
+#                    ENABLE_USB_PRINTF -D DEBUG -D SERVER -D ACCEL_TEST -lcN  #
+#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\EWARM\Server\List\ --diag_suppress Pa050 -o         #
+#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\EWARM\Server\Obj\ --debug --endian=little           #
+#                    --cpu=Cortex-M3 -e --fpu=None --dlib_config "C:\Program  #
+#                    Files (x86)\IAR Systems\Embedded Workbench               #
+#                    6.5\arm\INC\c\DLib_Config_Normal.h" -I                   #
+#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\EWARM\..\inc\ -I "C:\Users\FredZhou\Documents\Origi #
+#                    n\Projects\Project\BLE_Chat\EWARM\..\..\..\Bluetooth     #
+#                    LE\SimpleBlueNRG_HCI\" -I "C:\Users\FredZhou\Documents\O #
+#                    rigin\Projects\Project\BLE_Chat\EWARM\..\..\..\Bluetooth #
+#                     LE\SimpleBlueNRG_HCI\includes\" -I                      #
+#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\EWARM\..\..\..\platform\STM32L1XX\ -I               #
+#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\EWARM\..\..\..\platform\STM32L1XX\Libraries\ -I     #
+#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\EWARM\..\..\..\platform\STM32L1XX\Libraries\CMSIS\C #
+#                    M3\DeviceSupport\ST\STM32L1xx\ -I                        #
+#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\EWARM\..\..\..\platform\STM32L1XX\Libraries\STM32_U #
+#                    SB-FS-Device_Driver\inc\ -I                              #
+#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\EWARM\..\..\..\platform\STM32L1XX\Libraries\STM32L1 #
+#                    xx_StdPeriph_Driver\inc\ -I                              #
+#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\EWARM\..\..\..\platform\STM32L1XX\Libraries\I2C\inc #
+#                    \ -I C:\Users\FredZhou\Documents\Origin\Projects\Project #
+#                    \BLE_Chat\EWARM\..\..\..\platform\STM32L1XX\Libraries\LI #
+#                    S3DH\inc\ -I C:\Users\FredZhou\Documents\Origin\Projects #
+#                    \Project\BLE_Chat\EWARM\..\..\..\platform\STM32L1XX\Libr #
+#                    aries\STLM75\inc\ -I C:\Users\FredZhou\Documents\Origin\ #
+#                    Projects\Project\BLE_Chat\EWARM\..\..\..\platform\STM32L #
+#                    1XX\Libraries\HTS221\inc\ -I                             #
+#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\EWARM\..\..\..\platform\STM32L1XX\Libraries\LPS25H\ #
+#                    inc\ -I C:\Users\FredZhou\Documents\Origin\Projects\Proj #
+#                    ect\BLE_Chat\EWARM\..\..\..\platform\STM32L1XX\Libraries #
+#                    \SDK_Eval_STM32L\inc\ -Ohs --use_c++_inline -I           #
+#                    "C:\Program Files (x86)\IAR Systems\Embedded Workbench   #
+#                    6.5\arm\CMSIS\Include\"                                  #
+#    List file    =  C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\EWARM\Server\List\bluenrg_utils.lst                 #
+#    Object file  =  C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\EWARM\Server\Obj\bluenrg_utils.o                    #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Users\FredZhou\Documents\Origin\Projects\Bluetooth LE\SimpleBlueNRG_HCI\hci\controller\bluenrg_utils.c
+      1          
+      2          #include "hal.h"
+      3          #include "hal_types.h"
+      4          #include "ble_status.h"
+      5          #include "bluenrg_hci.h"
+      6          #include "bluenrg_utils.h"
+      7          #include "hci.h"
+      8          #include "osal.h"
+      9          #include "string.h"
+     10          #include "SDK_EVAL_Spi_Driver.h"
+     11          
+     12          #define SUPPORTED_BOOTLOADER_VERSION_MIN  3
+     13          #define SUPPORTED_BOOTLOADER_VERSION_MAX  5
+     14          
+     15          #define BASE_ADDRESS 0x10010000
+     16          
+     17          #define FW_OFFSET       (2*1024)  // 2 KB
+     18          #define FULL_STACK_SIZE (66*1024) // 66 KB
+     19          #define BOOTLOADER_SIZE (2*1024)  // 2 kB
+     20          #define DATA_SIZE       64        // 64 bytes
+     21          #define SECTOR_SIZE     (2*1024)  // 2 KB
+     22          
+     23          // x**32 + x**26 + x**23 + x ** 22 + x**16 + x**12 + x**11 +
+     24          // x**10 + x**8 + x**7 + x**5 + x**4 + x**2 + x**1 + x**0
+     25          #define CRC_POLY        0x04C11DB7      // the poly without the x**32
+     26          
+     27          #define IFR_SIZE 192
+     28          #define IFR_BASE_ADDRESS 0x10020000
+     29          
+     30          typedef struct{
+     31            uint8_t cold_ana_act_config_table[64];
+     32          }cold_table_TypeDef;
+     33          
+     34          static uint32_t updater_calc_crc(const uint8_t* data, uint16_t nr_of_bytes)
+     35          {
+     36              uint32_t i, j, a1;
+     37              uint32_t crc, value;
+     38          
+     39              crc = 0;
+     40              for (i = 0; i < nr_of_bytes; i += 4) {
+     41                value = data[i]|((uint32_t)data[i+1]<<8)|((uint32_t)data[i+2]<<16)|((uint32_t)data[i+3]<<24);
+     42                
+     43                  crc = crc ^ value;
+     44                  for (j = 0; j < 32; j ++) {
+     45                      a1 = (crc >> 31) & 0x1;
+     46                      crc = (crc << 1) ^ (a1 * CRC_POLY);
+     47                  }
+     48              }
+     49              return crc;
+     50          }
+     51          
+     52          int program_device(const uint8_t *fw_image, uint32_t fw_size, uint8_t skip_bootloader_verif)
+     53          {
+     54            uint8_t version;
+     55            uint8_t verify_from_sector = 0;
+     56            uint8_t number_sectors;
+     57            uint8_t last_sector[SECTOR_SIZE];
+     58            const uint8_t *last_image, *addr_image;
+     59            uint16_t last_size;
+     60            uint32_t address;
+     61            uint32_t crc, crc2;
+     62            tBleStatus ret;  
+     63            
+     64            BlueNRG_HW_Bootloader();
+     65            HCI_Process();
+     66          
+     67            if(aci_get_updater_version(&version))
+     68              return BLE_UTIL_ACI_ERROR;
+     69            
+     70            if(version < SUPPORTED_BOOTLOADER_VERSION_MIN || version > SUPPORTED_BOOTLOADER_VERSION_MAX)
+     71              return BLE_UTIL_UNSUPPORTED_VERSION;
+     72            
+     73            if(skip_bootloader_verif){
+     74              verify_from_sector = 1;
+     75            }
+     76          
+     77            if (fw_size > FULL_STACK_SIZE)
+     78              return BLE_UTIL_WRONG_IMAGE_SIZE;
+     79          
+     80            /***********************************************************************
+     81            * Erase BLUE flag
+     82            ************************************************************************/
+     83            
+     84            if(aci_erase_blue_flag()) 
+     85              return BLE_UTIL_ACI_ERROR;
+     86            
+     87            /***********************************************************************
+     88            * Erase sectors
+     89            ************************************************************************/  
+     90            
+     91            for(int i = FW_OFFSET; i < FULL_STACK_SIZE; i += SECTOR_SIZE){
+     92              ret = aci_updater_erase_sector(BASE_ADDRESS + i);
+     93              if(ret) return BLE_UTIL_ACI_ERROR;
+     94              HCI_Process();
+     95            }
+     96            
+     97            /***********************************************************************
+     98            * Flashing firmware
+     99            ************************************************************************/
+    100          
+    101            /* Calculate the number of sectors necessary to contain the fw image.
+    102               If the fw image is the bootloader we need to add a sector because 
+    103               the flashing start with an offset of 2 KB 
+    104            */
+    105            number_sectors = (fw_size / SECTOR_SIZE);
+    106            if (skip_bootloader_verif)
+    107              number_sectors++;
+    108          
+    109            for(int i = FW_OFFSET; i < (number_sectors*SECTOR_SIZE); i += DATA_SIZE){
+    110              /* If bootloader image we need to subtract the 2KB offset */
+    111              if (skip_bootloader_verif)
+    112                addr_image = fw_image + i - FW_OFFSET;
+    113              else
+    114                addr_image = fw_image + i;
+    115              ret = aci_updater_program_data_block(BASE_ADDRESS+i, DATA_SIZE, addr_image);
+    116              if(ret) return BLE_UTIL_ACI_ERROR;
+    117              HCI_Process();
+    118            }
+    119            
+    120            /* If the image is not multiple of a sector size */
+    121            if (fw_size % SECTOR_SIZE) {
+    122              /* If bootloader image we need to subtract the 2KB offset */
+    123              if (skip_bootloader_verif) {
+    124                last_image = fw_image + (number_sectors-1) * SECTOR_SIZE;
+    125                last_size = fw_size -(number_sectors-1) * SECTOR_SIZE;
+    126              } else {
+    127                last_image = fw_image + number_sectors * SECTOR_SIZE;
+    128                last_size = fw_size - number_sectors * SECTOR_SIZE;
+    129              }
+    130              memset(last_sector, 0xFF, SECTOR_SIZE);
+    131              memcpy (last_sector, last_image, last_size);
+    132              address = BASE_ADDRESS + (number_sectors * SECTOR_SIZE);
+    133              for(int i = 0; i < SECTOR_SIZE; i += DATA_SIZE){
+    134                ret = aci_updater_program_data_block(address+i, DATA_SIZE, last_sector+i);
+    135                if(ret) return BLE_UTIL_ACI_ERROR;
+    136                HCI_Process();
+    137              }
+    138            }
+    139          
+    140            /***********************************************************************
+    141            * Verify firmware
+    142            ************************************************************************/
+    143            
+    144            for(int i = (verify_from_sector*SECTOR_SIZE); i < (number_sectors*SECTOR_SIZE); i += SECTOR_SIZE){
+    145              address = BASE_ADDRESS + i;
+    146              if(aci_updater_calc_crc(address, 1, &crc))
+    147                return BLE_UTIL_ACI_ERROR;
+    148              
+    149              /* If bootloader image we need to subtract the 2KB offset */
+    150              if (skip_bootloader_verif) {
+    151                crc2 = updater_calc_crc(fw_image+i-FW_OFFSET,SECTOR_SIZE);
+    152              } else {
+    153                crc2 = updater_calc_crc(fw_image+i,SECTOR_SIZE);
+    154              }
+    155              
+    156              if(crc!=crc2)
+    157                return BLE_UTIL_CRC_ERROR;
+    158          
+    159              HCI_Process();
+    160            }
+    161          
+    162            /* If the image is not multiple of a sector size */
+    163            if (fw_size % SECTOR_SIZE) {
+    164              address = BASE_ADDRESS + (number_sectors*SECTOR_SIZE);
+    165              if(aci_updater_calc_crc(address, 1, &crc))
+    166                return BLE_UTIL_ACI_ERROR;
+    167              
+    168              crc2 = updater_calc_crc(last_sector,SECTOR_SIZE);
+    169              
+    170              if(crc!=crc2)
+    171                return BLE_UTIL_CRC_ERROR;
+    172          
+    173              HCI_Process();
+    174          
+    175            }    
+    176            
+    177            if(aci_reset_blue_flag())
+    178              return BLE_UTIL_ACI_ERROR;
+    179            
+    180            BlueNRG_RST();
+    181            
+    182            HCI_Process();
+    183          
+    184            return 0;
+    185          }
+    186          
+    187          int read_IFR(uint8_t *data)
+    188          {
+    189            uint8_t version;
+    190            tBleStatus ret;
+    191            
+    192            aci_updater_start(); // TODO: Use HW activation if possible 
+    193            if(aci_get_updater_version(&version))
+    194              return BLE_UTIL_ACI_ERROR;
+    195            
+    196            if(version < SUPPORTED_BOOTLOADER_VERSION_MIN || version > SUPPORTED_BOOTLOADER_VERSION_MAX)
+    197              return BLE_UTIL_UNSUPPORTED_VERSION;
+    198            
+    199            /***********************************************************************
+    200            * Reading last 3 IFR 64-byte blocks
+    201            ************************************************************************/
+    202            
+    203            for(int i = 66*1024 - 3*64; i < 66*1024; i += 64){
+    204              ret = aci_updater_read_data_block(BASE_ADDRESS+i, 64, data);
+    205              if(ret) return BLE_UTIL_ACI_ERROR;
+    206            }
+    207            
+    208            BlueNRG_RST();
+    209          
+    210            return 0;
+    211            
+    212          }
+    213          
+    214          void parse_IFR_data_config(const uint8_t data[64], IFR_config2_TypeDef *IFR_config)
+    215          {
+    216            IFR_config->stack_mode = data[0];
+    217            //IFR_config->ls_crystal_period = LE_TO_HOST_32(data+20);
+    218            //IFR_config->ls_crystal_freq = LE_TO_HOST_32(data+24);
+    219            IFR_config->slave_sca_ppm = LE_TO_HOST_16(data+28);
+    220            IFR_config->master_sca = data[30];
+    221            IFR_config->hs_startup_time = LE_TO_HOST_16(data+32);
+    222            IFR_config->year = BCD_TO_INT(data[41]);
+    223            IFR_config->month = BCD_TO_INT(data[42]);
+    224            IFR_config->day = BCD_TO_INT(data[43]);    
+    225          }
+    226          
+    227          int IFR_validate(IFR_config2_TypeDef *IFR_config)
+    228          {
+    229            if(IFR_config->stack_mode < 1 || IFR_config->stack_mode > 3)
+    230              return BLE_UTIL_PARSE_ERROR; // Unknown Stack Mode
+    231            if(IFR_config->master_sca > 7)
+    232              return BLE_UTIL_PARSE_ERROR; // Invalid Master SCA
+    233            if(IFR_config->month > 12 || IFR_config->month < 1)
+    234              return BLE_UTIL_PARSE_ERROR; // Invalid date
+    235            if(IFR_config->day > 31 || IFR_config->day < 1)
+    236              return BLE_UTIL_PARSE_ERROR; // Invalid date
+    237            if(IFR_config->month > 12 || IFR_config->month < 1)
+    238              return BLE_UTIL_PARSE_ERROR; // Invalid date
+    239            
+    240            return 0;
+    241          }
+    242          
+    243          /* TODO: Function to generate data from given options. */
+    244          
+    245          void change_IFR_data_config(IFR_config2_TypeDef *IFR_config, uint8_t data[64])
+    246          {
+    247            data[0] = IFR_config->stack_mode;
+    248            //HOST_TO_LE_32(data+20, IFR_config->ls_crystal_period);
+    249            //HOST_TO_LE_32(data+24, IFR_config->ls_crystal_freq);
+    250            HOST_TO_LE_16(data+28, IFR_config->slave_sca_ppm);
+    251            data[30] = IFR_config->master_sca;
+    252            HOST_TO_LE_16(data+32, IFR_config->hs_startup_time);  
+    253            data[41] = INT_TO_BCD(IFR_config->year);
+    254            data[42] = INT_TO_BCD(IFR_config->month);
+    255            data[43] = INT_TO_BCD(IFR_config->day);
+    256          }
+    257          
+    258          
+    259          int program_IFR(const IFR_config_TypeDef *ifr_image)
+    260          {
+    261            uint8_t version;
+    262            tBleStatus ret;  
+    263            uint8_t ifr_data[2*1024];
+    264            
+    265            aci_updater_start(); // TODO: Use HW activation if possible 
+    266            if(aci_get_updater_version(&version))
+    267              return BLE_UTIL_ACI_ERROR;
+    268            
+    269            if(version < SUPPORTED_BOOTLOADER_VERSION_MIN || version > SUPPORTED_BOOTLOADER_VERSION_MAX)
+    270              return BLE_UTIL_UNSUPPORTED_VERSION;
+    271            
+    272            /***********************************************************************
+    273             * READ IFR data
+    274             ************************************************************************/  
+    275            for(int i = 0; i < (2*1024); i += 64){
+    276              ret = aci_updater_read_data_block(IFR_BASE_ADDRESS+i, 64, ifr_data+i);
+    277              if(ret != BLE_STATUS_SUCCESS){
+    278                return ret;
+    279              }
+    280            }
+    281            
+    282            /***********************************************************************
+    283            * Erase IFR sectors
+    284            ************************************************************************/  
+    285            ret = aci_updater_erase_sector(IFR_BASE_ADDRESS);
+    286            if(ret != BLE_STATUS_SUCCESS) 
+    287              return BLE_UTIL_ACI_ERROR;
+    288            
+    289            /***********************************************************************
+    290            * Flashing IFR
+    291            ************************************************************************/
+    292            Osal_MemCpy(&ifr_data[2*1024-IFR_SIZE], ifr_image, IFR_SIZE);
+    293            for(int i = 0; i < (2*1024); i += 64){
+    294              ret = aci_updater_program_data_block(IFR_BASE_ADDRESS+i, 64, ifr_data+i);
+    295              if(ret != BLE_STATUS_SUCCESS) 
+    296                return BLE_UTIL_ACI_ERROR;
+    297            }
+    298          
+    299            /***********************************************************************
+    300            * Verify IFR
+    301            ************************************************************************/  
+    302            {
+    303              uint8_t ifr_updated[64];
+    304              for(int i = 0; i < (2*1024); i += 64){
+    305                ret = aci_updater_read_data_block(IFR_BASE_ADDRESS+i, 64, ifr_updated);
+    306                if(ret != BLE_STATUS_SUCCESS){
+    307          	return ret;
+    308                }
+    309                if (memcmp(ifr_updated, ifr_data+i, 64) != 0)
+    310          	return BLE_UTIL_WRONG_VERIFY;
+    311              }
+    312            }
+    313          
+    314            BlueNRG_RST();
+    315              
+    316            return 0;
+    317          }
+    318          
+    319          uint8_t verify_IFR(const IFR_config_TypeDef *ifr_data)
+    320          {
+    321            uint8_t ifr_updated[64];
+    322            uint8_t version, ret;
+    323              
+    324            aci_updater_start(); // TODO: Use HW activation if possible 
+    325            if(aci_get_updater_version(&version))
+    326              return BLE_UTIL_ACI_ERROR;
+    327            for(int i = 0; i < (3*64); i += 64){
+    328              ret = aci_updater_read_data_block((IFR_BASE_ADDRESS+2048-IFR_SIZE)+i, 64, ifr_updated);
+    329              if(ret != BLE_STATUS_SUCCESS){
+    330                return ret;
+    331              }
+    332              if (memcmp(ifr_updated, ((uint8_t*)ifr_data)+i, 64) != 0)
+    333                return BLE_UTIL_WRONG_VERIFY;
+    334            }
+    335          
+    336            BlueNRG_RST();
+    337            
+    338            return 0;
+    339          }
+    340          
+    341          uint8_t getBlueNRGVersion(uint8_t *hwVersion, uint16_t *fwVersion)
+    342          {
+    343            uint8_t status;
+    344            uint8_t hci_version, lmp_pal_version;
+    345            uint16_t hci_revision, manufacturer_name, lmp_pal_subversion;
+    346          
+    347            status = hci_le_read_local_version(&hci_version, &hci_revision, &lmp_pal_version, 
+    348          				     &manufacturer_name, &lmp_pal_subversion);
+    349          
+    350            if (status == BLE_STATUS_SUCCESS) {
+    351              *hwVersion = hci_revision >> 8;
+    352              *fwVersion = (hci_revision & 0xFF) << 8;              // Major Version Number
+    353              *fwVersion |= ((lmp_pal_subversion >> 4) & 0xF) << 4; // Minor Version Number
+    354              *fwVersion |= lmp_pal_subversion & 0xF;               // Patch Version Number
+    355            }
+    356          
+    357            HCI_Process();
+    358          
+    359            return status;
+    360          }
+    361          
+    362          uint8_t getBlueNRGUpdaterVersion(uint8_t *version)
+    363          {
+    364            HCI_Process();
+    365          
+    366            BlueNRG_HW_Bootloader();
+    367          
+    368            HCI_Process();
+    369          
+    370            if(aci_get_updater_version(version))
+    371              return BLE_UTIL_ACI_ERROR;
+    372            
+    373            if(*version < SUPPORTED_BOOTLOADER_VERSION_MIN || *version > SUPPORTED_BOOTLOADER_VERSION_MAX)
+    374              return BLE_UTIL_UNSUPPORTED_VERSION;
+    375          
+    376            BlueNRG_RST();
+    377          
+    378            HCI_Process();
+    379          
+    380            return BLE_STATUS_SUCCESS;
+    381          }
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       0   IFR_validate
+       0   change_IFR_data_config
+       8   getBlueNRGUpdaterVersion
+         8   -> BlueNRG_HW_Bootloader
+         8   -> BlueNRG_RST
+         8   -> HCI_Process
+         8   -> aci_get_updater_version
+      32   getBlueNRGVersion
+        32   -> HCI_Process
+        32   -> hci_le_read_local_version
+       0   parse_IFR_data_config
+    2136   program_IFR
+      2136   -> BlueNRG_RST
+      2136   -> Osal_MemCpy
+      2136   -> aci_get_updater_version
+      2136   -> aci_updater_erase_sector
+      2136   -> aci_updater_program_data_block
+      2136   -> aci_updater_read_data_block
+      2136   -> aci_updater_start
+      2136   -> memcmp
+    2096   program_device
+      2096   -> BlueNRG_HW_Bootloader
+      2096   -> BlueNRG_RST
+      2096   -> HCI_Process
+      2096   -> __aeabi_memcpy
+      2096   -> __aeabi_memset4
+      2096   -> aci_erase_blue_flag
+      2096   -> aci_get_updater_version
+      2096   -> aci_reset_blue_flag
+      2096   -> aci_updater_calc_crc
+      2096   -> aci_updater_erase_sector
+      2096   -> aci_updater_program_data_block
+      2096   -> updater_calc_crc
+      16   read_IFR
+        16   -> BlueNRG_RST
+        16   -> aci_get_updater_version
+        16   -> aci_updater_read_data_block
+        16   -> aci_updater_start
+      12   updater_calc_crc
+      80   verify_IFR
+        80   -> BlueNRG_RST
+        80   -> aci_get_updater_version
+        80   -> aci_updater_read_data_block
+        80   -> aci_updater_start
+        80   -> memcmp
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable4
+       4  ??DataTable4_1
+       4  ??DataTable4_2
+       4  ??DataTable4_3
+       4  ??DataTable4_4
+       4  ??DataTable4_5
+      36  IFR_validate
+     106  change_IFR_data_config
+      52  getBlueNRGUpdaterVersion
+      86  getBlueNRGVersion
+      94  parse_IFR_data_config
+     178  program_IFR
+     544  program_device
+      88  read_IFR
+      64  updater_calc_crc
+     120  verify_IFR
+
+ 
+ 1 392 bytes in section .text
+ 
+ 1 392 bytes of CODE memory
+
+Errors: none
+Warnings: none

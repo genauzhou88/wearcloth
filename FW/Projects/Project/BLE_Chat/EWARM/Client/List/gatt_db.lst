@@ -1,0 +1,217 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.60.1.5097/W32 for ARM      09/Oct/2014  10:33:26 #
+# Copyright 1999-2013 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\src\gatt_db.c                                       #
+#    Command line =  C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\src\gatt_db.c -D USE_STDPERIPH_DRIVER -D            #
+#                    STM32L1XX_MD -D SYSCLK_FREQ_HSI_32MHz -D ENABLE_USB -D   #
+#                    ENABLE_USB_PRINTF -D CLIENT=1 -D DEBUG -D                #
+#                    BLUENRG_CONFIG=BLUENRG_16_MHZ -lcN                       #
+#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\EWARM\Client\List\ --diag_suppress Pa050 -o         #
+#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\EWARM\Client\Obj\ --debug --endian=little           #
+#                    --cpu=Cortex-M3 -e --fpu=None --dlib_config "C:\Program  #
+#                    Files (x86)\IAR Systems\Embedded Workbench               #
+#                    6.5\arm\INC\c\DLib_Config_Normal.h" -I                   #
+#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\EWARM\..\inc\ -I "C:\Users\FredZhou\Documents\Origi #
+#                    n\Projects\Project\BLE_Chat\EWARM\..\..\..\Bluetooth     #
+#                    LE\SimpleBlueNRG_HCI\" -I "C:\Users\FredZhou\Documents\O #
+#                    rigin\Projects\Project\BLE_Chat\EWARM\..\..\..\Bluetooth #
+#                     LE\SimpleBlueNRG_HCI\includes\" -I                      #
+#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\EWARM\..\..\..\platform\STM32L1XX\ -I               #
+#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\EWARM\..\..\..\platform\STM32L1XX\Libraries\ -I     #
+#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\EWARM\..\..\..\platform\STM32L1XX\Libraries\CMSIS\C #
+#                    M3\DeviceSupport\ST\STM32L1xx\ -I                        #
+#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\EWARM\..\..\..\platform\STM32L1XX\Libraries\STM32_U #
+#                    SB-FS-Device_Driver\inc\ -I                              #
+#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\EWARM\..\..\..\platform\STM32L1XX\Libraries\STM32L1 #
+#                    xx_StdPeriph_Driver\inc\ -I                              #
+#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\EWARM\..\..\..\platform\STM32L1XX\Libraries\I2C\inc #
+#                    \ -I C:\Users\FredZhou\Documents\Origin\Projects\Project #
+#                    \BLE_Chat\EWARM\..\..\..\platform\STM32L1XX\Libraries\LI #
+#                    S3DH\inc\ -I C:\Users\FredZhou\Documents\Origin\Projects #
+#                    \Project\BLE_Chat\EWARM\..\..\..\platform\STM32L1XX\Libr #
+#                    aries\STLM75\inc\ -I C:\Users\FredZhou\Documents\Origin\ #
+#                    Projects\Project\BLE_Chat\EWARM\..\..\..\platform\STM32L #
+#                    1XX\Libraries\HTS221\inc\ -I                             #
+#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\EWARM\..\..\..\platform\STM32L1XX\Libraries\LPS25H\ #
+#                    inc\ -I C:\Users\FredZhou\Documents\Origin\Projects\Proj #
+#                    ect\BLE_Chat\EWARM\..\..\..\platform\STM32L1XX\Libraries #
+#                    \SDK_Eval_STM32L\inc\ -Ohs --use_c++_inline -I           #
+#                    "C:\Program Files (x86)\IAR Systems\Embedded Workbench   #
+#                    6.5\arm\CMSIS\Include\"                                  #
+#    List file    =  C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\EWARM\Client\List\gatt_db.lst                       #
+#    Object file  =  C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\EWARM\Client\Obj\gatt_db.o                          #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_Chat\src\gatt_db.c
+      1          #include "hal_types.h"
+      2          #include "gatt_server.h"
+      3          #include "gap.h"
+      4          #include "string.h"
+      5          #include "bluenrg_hci.h"
+      6          #include "hci_internal.h"
+      7          #include "app_state.h"
+      8          #include <stdio.h>
+      9          
+     10          
+     11          #ifndef DEBUG
+     12          #define DEBUG 1
+     13          #endif
+     14          
+     15          #if DEBUG
+     16          #include <stdio.h>
+     17          #define PRINTF(...) printf(__VA_ARGS__)
+     18          #else
+     19          #define PRINTF(...)
+     20          #endif
+     21          
+     22          
+     23          #define COPY_UUID_128(uuid_struct, uuid_15, uuid_14, uuid_13, uuid_12, uuid_11, uuid_10, uuid_9, uuid_8, uuid_7, uuid_6, uuid_5, uuid_4, uuid_3, uuid_2, uuid_1, uuid_0) \
+     24            do {\
+     25            	uuid_struct.uuid128[0] = uuid_0; uuid_struct.uuid128[1] = uuid_1; uuid_struct.uuid128[2] = uuid_2; uuid_struct.uuid128[3] = uuid_3; \
+     26          	uuid_struct.uuid128[4] = uuid_4; uuid_struct.uuid128[5] = uuid_5; uuid_struct.uuid128[6] = uuid_6; uuid_struct.uuid128[7] = uuid_7; \
+     27          	uuid_struct.uuid128[8] = uuid_8; uuid_struct.uuid128[9] = uuid_9; uuid_struct.uuid128[10] = uuid_10; uuid_struct.uuid128[11] = uuid_11; \
+     28          	uuid_struct.uuid128[12] = uuid_12; uuid_struct.uuid128[13] = uuid_13; uuid_struct.uuid128[14] = uuid_14; uuid_struct.uuid128[15] = uuid_15; \
+     29          	}while(0)
+     30          
+     31          tHalUint16 chatServHandle, TXCharHandle, RXCharHandle;
+     32          tHalUint16 chatServHandle2, TXCharHandle2, RXCharHandle2;
+     33          /*******************************************************************************
+     34          * Function Name  : Add_Chat_Service
+     35          * Description    : Add the 'Accelerometer' service.
+     36          * Input          : None
+     37          * Return         : Status.
+     38          *******************************************************************************/
+     39          tBleStatus Add_Chat_Service(void)
+     40          {
+     41            	tBleStatus ret;
+     42              
+     43              /*
+     44              UUIDs:
+     45              D973F2E0-B19E-11E2-9E96-0800200C9A66
+     46              D973F2E1-B19E-11E2-9E96-0800200C9A66
+     47              D973F2E2-B19E-11E2-9E96-0800200C9A66
+     48              */
+     49              
+     50              const uint8_t service_uuid[16] = {0x66,0x9a,0x0c,0x20,0x00,0x08,0x96,0x9e,0xe2,0x11,0x9e,0xb1,0xe0,0xf2,0x73,0xd9};
+     51              const tHalUint8 charUuidTX[16] = {0x66,0x9a,0x0c,0x20,0x00,0x08,0x96,0x9e,0xe2,0x11,0x9e,0xb1,0xe1,0xf2,0x73,0xd9};
+     52              const tHalUint8 charUuidRX[16] = {0x66,0x9a,0x0c,0x20,0x00,0x08,0x96,0x9e,0xe2,0x11,0x9e,0xb1,0xe2,0xf2,0x73,0xd9};
+     53          #if SERVER_2    
+     54              ret = aci_gatt_add_serv(UUID_TYPE_128, service_uuid, PRIMARY_SERVICE, 7, &chatServHandle2); /* original is 9?? */
+     55          #else
+     56              ret = aci_gatt_add_serv(UUID_TYPE_128, service_uuid, PRIMARY_SERVICE, 7, &chatServHandle); /* original is 9?? */
+     57          #endif
+     58              if (ret != BLE_STATUS_SUCCESS) goto fail;    
+     59          #if SERVER_2          
+     60              ret =  aci_gatt_add_char(chatServHandle2, UUID_TYPE_128, charUuidTX, 20, CHAR_PROP_NOTIFY, ATTR_PERMISSION_NONE, 0,
+     61                                16, 1, &TXCharHandle2);
+     62          #else
+     63              ret =  aci_gatt_add_char(chatServHandle, UUID_TYPE_128, charUuidTX, 20, CHAR_PROP_NOTIFY, ATTR_PERMISSION_NONE, 0,
+     64                                16, 1, &TXCharHandle);
+     65          #endif
+     66              if (ret != BLE_STATUS_SUCCESS) goto fail;
+     67          
+     68          #if SERVER_2     
+     69              ret =  aci_gatt_add_char(chatServHandle2, UUID_TYPE_128, charUuidRX, 20, CHAR_PROP_WRITE|CHAR_PROP_WRITE_WITHOUT_RESP, ATTR_PERMISSION_NONE, GATT_SERVER_ATTR_WRITE,
+     70                                16, 1, &RXCharHandle2);
+     71          #else
+     72              ret =  aci_gatt_add_char(chatServHandle, UUID_TYPE_128, charUuidRX, 20, CHAR_PROP_WRITE|CHAR_PROP_WRITE_WITHOUT_RESP, ATTR_PERMISSION_NONE, GATT_SERVER_ATTR_WRITE,
+     73                                16, 1, &RXCharHandle);
+     74          #endif
+     75              if (ret != BLE_STATUS_SUCCESS) goto fail;
+     76          #if SERVER_2    
+     77          	PRINTF("Chat Service 2 added.\nTX Char Handle2 %04X, RX Char Handle2 %04X\n", TXCharHandle2, RXCharHandle2);
+     78          #else
+     79                  PRINTF("Chat Service added.\nTX Char Handle %04X, RX Char Handle %04X\n", TXCharHandle, RXCharHandle);
+     80          #endif
+     81          	return BLE_STATUS_SUCCESS; 
+     82          	
+     83          fail:
+     84            	PRINTF("Error while adding Chat service.\n");
+     85          	return BLE_STATUS_ERROR ;
+     86          }
+     87          
+     88          
+     89          void Attribute_Modified_CB(tHalUint16 handle, tHalUint8 data_length, tHalUint8 *att_data)
+     90          {
+     91              if(handle == RXCharHandle + 1 || handle == RXCharHandle2 + 1){
+     92                  for(int i = 0; i < data_length; i++)
+     93                      printf("%c", att_data[i]);
+     94              }
+     95                else if(handle == TXCharHandle + 2 ){        
+     96                  if(att_data[0] == 0x01)
+     97                      APP_FLAG_SET(NOTIFICATIONS_ENABLED);
+     98              }
+     99                else if(handle == TXCharHandle2 + 2 ){        
+    100                  if(att_data[0] == 0x01)
+    101                      APP_FLAG_SET2(NOTIFICATIONS_ENABLED);
+    102              }
+    103          }
+    104          
+    105          
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+      88   Add_Chat_Service
+        88   -> aci_gatt_add_char
+        88   -> aci_gatt_add_serv
+        88   -> printf
+      16   Attribute_Modified_CB
+        16   -> printf
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ?<Constant "%c">
+      64  ?<Constant "Chat Service added.\nT...">
+      36  ?<Constant "Error while adding Ch...">
+      16  ?<Constant {102, 154, 12, 32, 0, 8, 150, 158,
+      16  ?<Constant {102, 154, 12, 32, 0, 8, 150, 158, _1
+      16  ?<Constant {102, 154, 12, 32, 0, 8, 150, 158, _2
+       4  ??DataTable7
+       4  ??DataTable7_1
+       4  ??DataTable7_2
+       4  ??DataTable7_3
+     158  Add_Chat_Service
+      88  Attribute_Modified_CB
+      10  chatServHandle
+          TXCharHandle
+          RXCharHandle
+          TXCharHandle2
+          RXCharHandle2
+       2  chatServHandle2
+
+ 
+  12 bytes in section .bss
+   4 bytes in section .rodata
+ 410 bytes in section .text
+ 
+ 410 bytes of CODE  memory
+   4 bytes of CONST memory
+  12 bytes of DATA  memory
+
+Errors: none
+Warnings: none

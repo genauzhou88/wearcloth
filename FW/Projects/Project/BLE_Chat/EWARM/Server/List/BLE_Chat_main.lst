@@ -1,0 +1,1267 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.60.1.5097/W32 for ARM      31/Oct/2014  21:00:29 #
+# Copyright 1999-2013 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\src\BLE_Chat_main.c                                 #
+#    Command line =  C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\src\BLE_Chat_main.c -D USE_STDPERIPH_DRIVER -D      #
+#                    STM32L1XX_MD -D SYSCLK_FREQ_HSI_32MHz -D ENABLE_USB -D   #
+#                    ENABLE_USB_PRINTF -D DEBUG -D SERVER -D ACCEL_TEST -lcN  #
+#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\EWARM\Server\List\ --diag_suppress Pa050 -o         #
+#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\EWARM\Server\Obj\ --debug --endian=little           #
+#                    --cpu=Cortex-M3 -e --fpu=None --dlib_config "C:\Program  #
+#                    Files (x86)\IAR Systems\Embedded Workbench               #
+#                    6.5\arm\INC\c\DLib_Config_Normal.h" -I                   #
+#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\EWARM\..\inc\ -I "C:\Users\FredZhou\Documents\Origi #
+#                    n\Projects\Project\BLE_Chat\EWARM\..\..\..\Bluetooth     #
+#                    LE\SimpleBlueNRG_HCI\" -I "C:\Users\FredZhou\Documents\O #
+#                    rigin\Projects\Project\BLE_Chat\EWARM\..\..\..\Bluetooth #
+#                     LE\SimpleBlueNRG_HCI\includes\" -I                      #
+#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\EWARM\..\..\..\platform\STM32L1XX\ -I               #
+#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\EWARM\..\..\..\platform\STM32L1XX\Libraries\ -I     #
+#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\EWARM\..\..\..\platform\STM32L1XX\Libraries\CMSIS\C #
+#                    M3\DeviceSupport\ST\STM32L1xx\ -I                        #
+#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\EWARM\..\..\..\platform\STM32L1XX\Libraries\STM32_U #
+#                    SB-FS-Device_Driver\inc\ -I                              #
+#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\EWARM\..\..\..\platform\STM32L1XX\Libraries\STM32L1 #
+#                    xx_StdPeriph_Driver\inc\ -I                              #
+#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\EWARM\..\..\..\platform\STM32L1XX\Libraries\I2C\inc #
+#                    \ -I C:\Users\FredZhou\Documents\Origin\Projects\Project #
+#                    \BLE_Chat\EWARM\..\..\..\platform\STM32L1XX\Libraries\LI #
+#                    S3DH\inc\ -I C:\Users\FredZhou\Documents\Origin\Projects #
+#                    \Project\BLE_Chat\EWARM\..\..\..\platform\STM32L1XX\Libr #
+#                    aries\STLM75\inc\ -I C:\Users\FredZhou\Documents\Origin\ #
+#                    Projects\Project\BLE_Chat\EWARM\..\..\..\platform\STM32L #
+#                    1XX\Libraries\HTS221\inc\ -I                             #
+#                    C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\EWARM\..\..\..\platform\STM32L1XX\Libraries\LPS25H\ #
+#                    inc\ -I C:\Users\FredZhou\Documents\Origin\Projects\Proj #
+#                    ect\BLE_Chat\EWARM\..\..\..\platform\STM32L1XX\Libraries #
+#                    \SDK_Eval_STM32L\inc\ -Ohs --use_c++_inline -I           #
+#                    "C:\Program Files (x86)\IAR Systems\Embedded Workbench   #
+#                    6.5\arm\CMSIS\Include\"                                  #
+#    List file    =  C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\EWARM\Server\List\BLE_Chat_main.lst                 #
+#    Object file  =  C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_ #
+#                    Chat\EWARM\Server\Obj\BLE_Chat_main.o                    #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Users\FredZhou\Documents\Origin\Projects\Project\BLE_Chat\src\BLE_Chat_main.c
+      1          /******************** (C) COPYRIGHT 2014 STMicroelectronics ********************
+      2          * File Name          : BLE_Chat_main.c
+      3          * Author             : AMS - AAS Division
+      4          * Version            : V1.0.1
+      5          * Date               : 10-February-2014
+      6          * Description        : BlueNRG main file for Chat demo
+      7          ********************************************************************************
+      8          * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
+      9          * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE TIME.
+     10          * AS A RESULT, STMICROELECTRONICS SHALL NOT BE HELD LIABLE FOR ANY DIRECT,
+     11          * INDIRECT OR CONSEQUENTIAL DAMAGES WITH RESPECT TO ANY CLAIMS ARISING FROM THE
+     12          * CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE CODING
+     13          * INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
+     14          *******************************************************************************/
+     15          /**
+     16           * @file  BLE_Chat_main.c
+     17           * @brief This is a Chat demo that shows how to implement a simple 2-way communication between two BlueNRG devices.
+     18           *
+     19           * <!-- Copyright 2014 by STMicroelectronics.  All rights reserved.       *80*-->
+     20          
+     21          * \section IAR_project IAR project
+     22            To use the project with IAR Embedded Workbench for ARM, please follow the instructions below:
+     23            -# Open the Embedded Workbench for ARM.
+     24            -# From the File->Open->Workspace menu, open the IAR workspace
+     25               <tt> ...\\Projects\\Project\\BLE_Chat\\EWARM\\BLE_Chat.eww </tt>
+     26            -# Select desired configuration to build
+     27            -# Select Project->Rebuild All. This will recompile and link the entire application
+     28            -# To download the binary image, please connect STLink to JTAG connector  in your board (if available).
+     29            -# Select Project->Download and Debug to download the related binary image.
+     30            -# Alternatively, open the BlueNRG GUI, put the board in DFU mode and download the built binary image.
+     31            -# Connect the application board to a PC USB port. Open a hyperterminal on the
+     32               corresponding USB virtual COMx port with the configuration as described in \ref Serial_IO.
+     33          
+     34          * \subsection IAR_project_configurations IAR project configurations
+     35          
+     36            - \c Client - Client role configuration 
+     37            - \c Server - Server role configuration
+     38          
+     39          * \section Prebuilt_images Prebuilt images
+     40            - BLE_Chat_Client.hex, BLE_Chat_Server.hex 
+     41           
+     42          * \section Jumper_settings Jumper settings
+     43          @table
+     44          ------------------------------------------------------
+     45          | Jumper name       |  Description                   | 
+     46          ------------------------------------------------------
+     47          | JP1, if available | USB or Battery supply position | 
+     48          
+     49          @endtable 
+     50          
+     51          
+     52          * \section Board_supported Board supported
+     53          @table
+     54          | Board name      | Board revision | NOTE        |
+     55          --------------------------------------------------
+     56          | STEVAL-IDB002V1 | 3.0            | Eval Kit    |
+     57          | STEVAL-IDB003V1 | 1.0            | USB Dongle  |
+     58          @endtable
+     59          
+     60          * \section Serial_IO Serial I/O
+     61            The application will listen for keys typed in one node and, on return press, it will send them to the remote node.
+     62            The remote node will listen for RF messages and it will output them in the serial port.
+     63            In other words everything typed in one node will be visible to the other node and viceversa.
+     64          @table
+     65          | Parameter name  | Value          | Unit        |
+     66          --------------------------------------------------
+     67          | Baudrate        | 115200         | bit/sec     |
+     68          | Data bits       | 8              | bit         |
+     69          | Parity          | None           | bit         |
+     70          | Stop bits       | 1              | bit         |
+     71          @endtable
+     72          
+     73          * \section LEDs_description LEDs description
+     74          @table
+     75          |                  | STEVAL-IDB002V1 | STEVAL-IDB003V1 |                 
+     76          | LED name         | Client/Server   | Client/Server   | 
+     77          --------------------------------------------------------
+     78          | D1               | Not used        | NA              |        
+     79          | D2               | Not used        | Not used        |     
+     80          | D3               | Not used        | Not used        |     
+     81          | D4               | Not used        | NA              |      
+     82          | D5               | Not used        | NA              |       
+     83          | D6               | Not used        | NA              |       
+     84          @endtable
+     85           - NA : Not Applicable;
+     86          
+     87          * \section Buttons_description Buttons description
+     88          @table
+     89          |                  | STEVAL-IDB002V1 | STEVAL-IDB003V1 |                 
+     90          | Button name      | Client/Server   | Client/Server   | 
+     91          --------------------------------------------------------
+     92          | RESET            | X               | NA              |  
+     93          | Push Button      | Not used        | NA              |   
+     94          | Jostick Sel      | Not used        | NA              |    
+     95          | SW1              | NA              | Not used        |     
+     96          | SW2              | NA              | Not used        |       
+     97          @endtable
+     98           - NA : Not Applicable;
+     99          
+    100          * \section DFU_Activation  DFU activation
+    101          BlueNRG boards are preprogrammed with a DFU application which allows to upload the 
+    102          STM32L micro with a selected binary image through USB. Follow list of actions 
+    103          for activating DFU on each supported platforms
+    104          @table
+    105          | Board  name          | Event                                             | Note               |
+    106          ------------------------------------------------------------------------------------------------|
+    107          | STEVAL-IDB002V1      | Press RESET and Push Button. Release RESET button | LED D2 is toggling |  
+    108          | STEVAL-IDB003V1      | Press SW1 button and plug USB dongle on a PC port | LED D3 is toggling |  
+    109          @endtable
+    110          
+    111          * \section Usage Usage
+    112          
+    113          This Chat demo has  are 2 roles:
+    114           - The server that expose the Chat service. It is the slave.
+    115           - The client that uses the Chat service. It is the master.
+    116          
+    117          The Chat Service contains 2 Characteristics:
+    118           -# The TX Characteristic: the client can enable notifications on this characteristic. When the server has data to be sent, it will send notifications which will contains the value of the TX Characteristic
+    119           -# The RX Characteristic: it is a writable caracteristic. When the client has data to be sent to the server, it will write a value into this characteristic.
+    120          
+    121          The maximum length of the characteristic value is 20 bytes.
+    122          
+    123          NOTES:
+    124           - The Client and Server workspaces can be configured in order to target a throughput test. Jut add the THROUGHPUT_TEST define on the preprocessor options on both workspaces.
+    125           - Program the client on one BlueNRG platform and reset it. The platform will be seen on the PC as a virtual COM port. Open the port in a serial terminal emulator. Client will start 4 seconds after reset.
+    126           - Program the server on a second BlueNRG platform and reset it. The two platforms will try to establish a connection. As soon as they get connected, the slave will 
+    127             send notification to the client of 20 bytes (200 notifications). 
+    128           - After all the notifications are received, the measured application throughput will be displayed.
+    129          
+    130          **/
+    131          /** @addtogroup BlueNRG_demonstrations_applications
+    132           * BlueNRG Chat demo \see BLE_Chat_main.c for documentation.
+    133           *
+    134           *@{
+    135           */
+    136          
+    137          /** @} */
+    138          /** \cond DOXYGEN_SHOULD_SKIP_THIS
+    139           */
+    140          /* Includes ------------------------------------------------------------------*/
+    141          #include "stm32l1xx.h"
+    142          #include "usb_lib.h"
+    143          #include "hw_config.h"
+    144          #include "hal_types.h"
+    145          #include "hci.h"
+    146          #include "bluenrg_hci.h"
+    147          #include "gp_timer.h"
+    148          #include "hal.h"
+    149          #include "osal.h"
+    150          #include "gatt_db.h"
+    151          #include "gatt_server.h"
+    152          #include "hci_internal.h"
+    153          #include "bluenrg_hci_internal.h"
+    154          #include "gap.h"
+    155          #include "sm.h"
+    156          #include "app_state.h"
+    157          #include <stdio.h>
+    158          
+    159          #include <lis3dh_driver.h>
+    160          
+    161          #include "rtctime.h"
+    162          
+    163          #include "SDK_EVAL_Config.h"
+    164          #include <bluenrg_utils.h>
+    165          /* External variables --------------------------------------------------------*/
+    166          /* Private typedef -----------------------------------------------------------*/
+    167          /* Private defines -----------------------------------------------------------*/
+    168          /** 
+    169            * @brief  Enable febug printf's
+    170            */ 
+    171          #ifndef DEBUG
+    172          #define DEBUG 1
+    173          #endif
+    174                
+    175          #define REQUEST_CONN_PARAM_UPDATE 0
+    176          
+    177          /* Private macros ------------------------------------------------------------*/
+    178          #if DEBUG
+    179          #include <stdio.h>
+    180          #define PRINTF(...) printf(__VA_ARGS__)
+    181          #else
+    182          #define PRINTF(...)
+    183          #endif
+    184          
+    185          #define NUM_PACKETS 200 // Only used for throughput test (define THROUGHPUT_TEST)
+    186          
+    187          #ifndef VECTOR_TABLE_BASE_ADDRESS 
+    188          /* default configuration: DFU upgrade is supported */
+    189          #define VECTOR_TABLE_BASE_ADDRESS            (0x3000)
+    190          #endif
+    191          
+    192          /* Private variables ---------------------------------------------------------*/
+    193          volatile int app_flags = SET_CONNECTABLE;
+    194          volatile int app2_flags = SET_CONNECTABLE; //maintain two flags for each server
+    195          volatile uint16_t connection_handle = 0;
+    196          volatile uint16_t connection2_handle = 0; //maintain two handle for different server
+    197          extern tHalUint16 chatServHandle, TXCharHandle, RXCharHandle;
+    198          extern tHalUint16 chatServHandle2, TXCharHandle2, RXCharHandle2; //maintain two handle
+    199          struct timer l2cap_req_timer;
+    200          
+    201          int connection_num = 0;
+    202          int bServerConnected = 0;
+    203          
+    204          /* Private variables ---------------------------------------------------------*/
+    205          extern RTC_TimeTypeDef RTC_TimeStructure;
+    206          extern RTC_InitTypeDef RTC_InitStructure;
+    207          
+    208          extern __IO uint32_t AsynchPrediv, SynchPrediv;
+    209          
+    210          /** 
+    211            * @brief  Handle of TX,RX  Characteristics.
+    212            */ 
+    213          #ifdef CLIENT
+    214          uint16_t tx_handle;
+    215          uint16_t rx_handle;
+    216          
+    217          uint16_t tx_handle2; //handle for SERVER_2
+    218          uint16_t rx_handle2; //handle for SERVER_2
+    219          #endif 
+    220          
+    221          
+    222          /* Private function prototypes -----------------------------------------------*/
+    223          void Make_Connection(void);
+    224          void User_Process(void);
+    225          void User_Process2(void);
+    226          /* Private functions ---------------------------------------------------------*/
+    227          
+    228          /*  User Function where serial received data should be processed */
+    229          void processInputData(uint8_t * rx_data, uint16_t data_size);
+    230          
+    231          
+    232          /* Extra function for Accel */
+    233          /*******************************************************************************
+    234          * Function Name  : Init_Accelerometer.
+    235          * Description    : Init LIS331DLH accelerometer.
+    236          * Input          : None.
+    237          * Output         : None.
+    238          * Return         : None.
+    239          *******************************************************************************/
+    240          void Init_Accelerometer(void)
+    241          {
+    242              uint8_t reg;
+    243                
+    244              LIS3DH_SpiInit();
+    245              
+    246              LIS3DH_GetWHO_AM_I(&reg);        
+    247              PRINTF("LIS_WHO_AM_I_ADDR: %02X\n", reg);    
+    248              //Initialize MEMS Sensor
+    249              //set ODR (turn ON device)
+    250               LIS3DH_SetODR(LIS3DH_ODR_100Hz);
+    251              //set PowerMode 
+    252               LIS3DH_SetMode(LIS3DH_NORMAL);
+    253              //set Fullscale
+    254              LIS3DH_SetFullScale(LIS3DH_FULLSCALE_2);
+    255              //set axis Enable
+    256              LIS3DH_SetAxis(LIS3DH_X_ENABLE | LIS3DH_Y_ENABLE |  LIS3DH_Z_ENABLE);    
+    257              // Enable Free Fall detection
+    258              //LIS3DH_SetInt1Pin(LIS3DH_I1_INT1_ON_PIN_INT1_ENABLE);
+    259              LIS3DH_SetInt2Pin(LIS3DH_I2_INT1_ON_PIN_INT2_ENABLE);
+    260              LIS3DH_Int1LatchEnable(MEMS_ENABLE);
+    261              LIS3DH_SetInt1Threshold(16);    
+    262              LIS3DH_SetInt1Duration(5);    
+    263              LIS3DH_SetIntConfiguration(LIS3DH_INT1_AND|LIS3DH_INT1_ZLIE_ENABLE|
+    264                                         LIS3DH_INT1_YLIE_ENABLE|LIS3DH_INT1_XLIE_ENABLE);    
+    265              LIS3DH_Interrupts_Config();    
+    266              LIS3DH_ResetInt1Latch();
+    267          }
+    268          
+    269          
+    270          
+    271          
+    272          
+    273          
+    274          /*******************************************************************************
+    275          * Function Name  : main.
+    276          * Description    : Main routine.
+    277          * Input          : None.
+    278          * Output         : None.
+    279          * Return         : None.
+    280          *******************************************************************************/
+    281          int main(void)
+    282          {
+    283              int ret;
+    284              
+    285              NVIC_SetVectorTable(NVIC_VectTab_FLASH, VECTOR_TABLE_BASE_ADDRESS);
+    286              
+    287              /* Identify BlueNRG platform */
+    288              SdkEvalIdentification();
+    289          
+    290              RCC_Configuration();
+    291              
+    292              /* Init I/O ports */
+    293              Init_GPIOs ();
+    294              
+    295              PWR_PVDCmd(DISABLE);
+    296              
+    297              /* Disable FLASH during Sleep  */
+    298              FLASH_SLEEPPowerDownCmd(ENABLE);
+    299              
+    300              /* Enable Ultra low power mode */
+    301              PWR_UltraLowPowerCmd(ENABLE);
+    302              
+    303              PWR_FastWakeUpCmd(DISABLE);
+    304              
+    305              NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+    306              
+    307              Clock_Init();
+    308              
+    309              /* Delay needed only to be able to acces the JTAG interface after reset
+    310              if it will be disabled later. */
+    311              Clock_Wait(500);    
+    312              
+    313              /* Configure I/O communication channel:
+    314                 It requires the void IO_Receive_Data(uint8_t * rx_data, uint16_t data_size) function
+    315                 where user received data should be processed */
+    316              SdkEval_IO_Config(processInputData);
+    317              
+    318              /* Delay for debug purpose, in order to see printed data at startup. */
+    319              for(int i = 0; i < 100 ; i++){
+    320                  printf(".");
+    321                  Clock_Wait(40);
+    322              }
+    323          
+    324              HCI_Init();
+    325              
+    326              /* Check RTC function */
+    327              //Add by Fred 
+    328              if (RTC_ReadBackupRegister(RTC_BKP_DR0) != 0x32F2)
+    329              {  
+    330                /* RTC configuration  */
+    331                printf("No backup register found, re-config RTC!\n");
+    332                RTC_Config();
+    333          
+    334                /* Configure the RTC data register and RTC prescaler */
+    335                RTC_InitStructure.RTC_AsynchPrediv = AsynchPrediv;
+    336                RTC_InitStructure.RTC_SynchPrediv = SynchPrediv;
+    337                RTC_InitStructure.RTC_HourFormat = RTC_HourFormat_24;
+    338               
+    339                /* Check on RTC init */
+    340                if (RTC_Init(&RTC_InitStructure) == ERROR)
+    341                {
+    342                  printf("\n\r        /!\\***** RTC Prescaler Config failed ********/!\\ \n\r");
+    343                }
+    344          
+    345                /* Configure the time register */
+    346                RTC_TimeRegulate(); 
+    347              }
+    348              else
+    349              {
+    350                /* Check if the Power On Reset flag is set */
+    351                if (RCC_GetFlagStatus(RCC_FLAG_PORRST) != RESET)
+    352                {
+    353                  printf("\r\n Power On Reset occurred....\n\r");
+    354                }
+    355                /* Check if the Pin Reset flag is set */
+    356                else if (RCC_GetFlagStatus(RCC_FLAG_PINRST) != RESET)
+    357                {
+    358                  printf("\r\n External Reset occurred....\n\r");
+    359                }
+    360          
+    361                printf("\n\r No need to configure RTC....\n\r");
+    362                
+    363                /* Enable the PWR clock */
+    364                RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR, ENABLE);
+    365          
+    366                /* Allow access to RTC */
+    367                PWR_RTCAccessCmd(ENABLE);
+    368          
+    369                /* Wait for RTC APB registers synchronisation */
+    370                RTC_WaitForSynchro();
+    371          
+    372                /* Clear the RTC Alarm Flag */
+    373                RTC_ClearFlag(RTC_FLAG_ALRAF);
+    374          
+    375                /* Clear the EXTI Line 17 Pending bit (Connected internally to RTC Alarm) */
+    376                EXTI_ClearITPendingBit(EXTI_Line17);
+    377          
+    378                /* Display the RTC Time and Alarm */
+    379                RTC_TimeShow();
+    380              }
+    381              
+    382              /* Init SPI interface */
+    383              SdkEvalSpiInit(SPI_MODE_EXTI);
+    384              BlueNRG_RST(); 
+    385              
+    386              //check para
+    387          #if CLIENT
+    388              //Write Mode 3 to make sure we can connect multiple clients
+    389              tHalUint8 newmode = 0x03;
+    390              ret = aci_hal_write_config_data(0x2D,0x01,&newmode); //Directly from ST support
+    391              
+    392              if(ret){
+    393                PRINTF("Setting Mode 3 failed! \n");
+    394              }
+    395          #endif
+    396              
+    397              {
+    398          #if CLIENT
+    399                  tHalUint8 bdaddr[] = {0xbb, 0x00, 0x00, 0xE1, 0x80, 0x02}; //client bd address
+    400          #elif SERVER 
+    401                  tHalUint8 bdaddr[] = {0xaa, 0x00, 0x00, 0xE1, 0x80, 0x02}; //server1 bd address
+    402          #else
+    403                  tHalUint8 bdaddr[] = {0xcc, 0x00, 0x00, 0xE1, 0x80, 0x02}; //server2 bd address
+    404          #endif
+    405                  
+    406                  
+    407                  ret = aci_hal_write_config_data(CONFIG_DATA_PUBADDR_OFFSET, CONFIG_DATA_PUBADDR_LEN,
+    408                                                  bdaddr);        
+    409          
+    410                  if(ret){
+    411                      PRINTF("Setting BD_ADDR failed.\n");
+    412                  }
+    413              }
+    414              
+    415              ret = aci_gatt_init();    
+    416              if(ret){
+    417                  PRINTF("GATT_Init failed.\n");
+    418              }
+    419              
+    420              {
+    421                  uint16_t service_handle, dev_name_char_handle, appearance_char_handle;
+    422          #if CLIENT //centrol role for client
+    423                  ret = aci_gap_init(GAP_CENTRAL_ROLE, &service_handle, &dev_name_char_handle, &appearance_char_handle);
+    424          #else //peripheral role for server and server_2
+    425                  ret = aci_gap_init(GAP_PERIPHERAL_ROLE, &service_handle, &dev_name_char_handle, &appearance_char_handle);        
+    426          #endif
+    427                  if(ret){
+    428                      PRINTF("GAP_Init failed.\n");
+    429                  }
+    430              }
+    431            
+    432              ret = aci_gap_set_auth_requirement(MITM_PROTECTION_REQUIRED,
+    433                                                 OOB_AUTH_DATA_ABSENT,
+    434                                                 NULL,
+    435                                                 7,
+    436                                                 16,
+    437                                                 USE_FIXED_PIN_FOR_PAIRING,
+    438                                                 123456,
+    439                                                 BONDING);
+    440              PRINTF("BLE Stack Initialized.\n");
+    441              
+    442              Init_Accelerometer();
+    443              
+    444              PRINTF("Accelerometer Initialized.\n");
+    445              
+    446          #if CLIENT
+    447              PRINTF("CLIENT: BLE Stack Initialized  (platform: %d)\n", SdkEvalGetVersion());
+    448          #elif SERVER
+    449              PRINTF("SERVER: BLE Stack Initialized (platform: %d)\n", SdkEvalGetVersion());
+    450              ret = Add_Chat_Service();
+    451          #else
+    452              PRINTF("SERVER2: BLE Stack Initialized  (platform: %d)\n", SdkEvalGetVersion());
+    453              ret = Add_Chat_Service();
+    454              
+    455              if(ret == BLE_STATUS_SUCCESS)
+    456                  PRINTF("Service added successfully.\n");
+    457              else
+    458                  PRINTF("Error while adding service.\n");
+    459          #endif 
+    460              
+    461          
+    462              
+    463              /* -2 dBm output power */
+    464              ret = aci_hal_set_tx_power_level(1,4);
+    465                  
+    466              while(1)
+    467              { 
+    468                  HCI_Process();
+    469                  User_Process();
+    470                  /*
+    471                  if (bServerConnected) //only make connection when Server1 is connectted
+    472                  {
+    473                    //PRINTF("Start to connect with Server_2\n");
+    474                    User_Process2();
+    475                  }
+    476                  */
+    477              }
+    478              }
+    479          
+    480          /**
+    481            * @brief  Make the device connectable
+    482            * @param  None 
+    483            * @retval None
+    484            */
+    485          void Make_anotherConnection(void)
+    486          {  
+    487              tBleStatus ret;
+    488              
+    489              
+    490          #if CLIENT
+    491              //wait for another 5 second before connection
+    492              //Clock_Wait(5000);
+    493              tBDAddr mbdaddr = {0xcc, 0x00, 0x00, 0xE1, 0x80, 0x02};
+    494              //connect with SERVER_2
+    495               ret = aci_gap_create_connection(0x4000, 0x4000, PUBLIC_ADDR, mbdaddr, PUBLIC_ADDR, 16, 16, 0, 0x03E8, 0 , 0x3E80); 
+    496              //ret = aci_gap_create_connection(0x1000, 0x1000, PUBLIC_ADDR, bdaddr, PUBLIC_ADDR, 8, 8, 0, 60, 2000 , 2000);
+    497              
+    498              if (ret != 0){
+    499                  PRINTF("Error while starting connection with multi-node. return code is %d\n",ret);
+    500                  Clock_Wait(100);        
+    501          	}
+    502          #else
+    503              //set a slightly different local name for SERVER_2
+    504              const char local_name[] = {AD_TYPE_COMPLETE_LOCAL_NAME,'B','l','u','e','N','R','G','_','C','h','a','t'};
+    505              
+    506              /* disable scan response */
+    507              hci_le_set_scan_resp_data(0,NULL);
+    508              
+    509              PRINTF("General Discoverable Mode ");
+    510              ret = aci_gap_set_discoverable(ADV_IND, 0, 0, PUBLIC_ADDR, NO_WHITE_LIST_USE,
+    511                                             13, local_name, 0, NULL, 0, 0);
+    512          
+    513              PRINTF("%d\n",ret);
+    514          #endif
+    515          }
+    516          void Make_Connection(void)
+    517          {  
+    518              tBleStatus ret;
+    519              
+    520              
+    521          #if CLIENT
+    522              
+    523              tBDAddr bdaddr = {0xaa, 0x00, 0x00, 0xE1, 0x80, 0x02};
+    524              //connect with SERVER_1
+    525              ret = aci_gap_create_connection(0x4000, 0x4000, PUBLIC_ADDR, bdaddr, PUBLIC_ADDR, 16, 16, 0, 0x03E8, 0 , 0x3E80); 
+    526              //ret = aci_gap_create_connection(0x1000, 0x1000, PUBLIC_ADDR, bdaddr, PUBLIC_ADDR, 8, 8, 0, 60, 2000 , 2000);
+    527              
+    528              if (ret != 0){
+    529                  PRINTF("Error while starting connection.\n");
+    530                  Clock_Wait(100);        
+    531          	}
+    532              
+    533          #else
+    534              
+    535              const char local_name[] = {AD_TYPE_COMPLETE_LOCAL_NAME,'B','l','u','e','N','R','G','_','C','h','a','t'};
+    536              
+    537              /* disable scan response */
+    538              hci_le_set_scan_resp_data(0,NULL);
+    539              
+    540              PRINTF("General Discoverable Mode ");
+    541              ret = aci_gap_set_discoverable(ADV_IND, 0, 0, PUBLIC_ADDR, NO_WHITE_LIST_USE,
+    542                                             13, local_name, 0, NULL, 0, 0);
+    543          
+    544              PRINTF("%d\n",ret);
+    545          #endif
+    546          }
+    547          
+    548          /**
+    549            * @brief  This function is called when there is a LE Connection Complete event.
+    550            * @param  addr Address of peer device
+    551            * @param  handle Connection handle
+    552            * @retval None
+    553            */
+    554          void GAP_ConnectionComplete_CB(uint8_t addr[6], uint16_t handle)
+    555          {    
+    556              if (addr[0] == 0xaa) //server is connectted
+    557              {
+    558                connection_handle = handle;
+    559                connection_num++;
+    560                APP_FLAG_SET(CONNECTED); 
+    561                bServerConnected = 1;
+    562              }
+    563              else if (addr[0] == 0xcc) //server_2 is connectted
+    564              {
+    565                connection2_handle = handle;
+    566                connection_num++;
+    567                APP_FLAG_SET2(CONNECTED); 
+    568              }
+    569              
+    570              
+    571              PRINTF("Connected to device:");
+    572              for(int i = 5; i > 0; i--){
+    573                  PRINTF("%02X-", addr[i]);
+    574              }
+    575              PRINTF("\ntotoal connection %d, addr: %02X\n", connection_num, addr[0]);
+    576              
+    577                
+    578          #if REQUEST_CONN_PARAM_UPDATE
+    579              APP_FLAG_CLEAR(L2CAP_PARAM_UPD_SENT);
+    580              Timer_Set(&l2cap_req_timer, CLOCK_SECOND*2);
+    581          #endif
+    582              
+    583          }
+    584          
+    585          /**
+    586            * @brief  This function is called when the peer device get disconnected.
+    587            * @param  None 
+    588            * @retval None
+    589            */
+    590          void GAP_DisconnectionComplete_CB(void)
+    591          {
+    592              connection_num--;
+    593              bServerConnected = 0;
+    594              APP_FLAG_CLEAR(CONNECTED);
+    595              APP_FLAG_CLEAR2(CONNECTED);
+    596              PRINTF("Disconnected\n");
+    597              /* Make the device connectable again. */
+    598              APP_FLAG_SET(SET_CONNECTABLE);
+    599              APP_FLAG_SET2(SET_CONNECTABLE);
+    600              APP_FLAG_CLEAR(NOTIFICATIONS_ENABLED);
+    601              APP_FLAG_CLEAR2(NOTIFICATIONS_ENABLED);
+    602              
+    603              APP_FLAG_CLEAR(START_READ_TX_CHAR_HANDLE);
+    604              APP_FLAG_CLEAR(END_READ_TX_CHAR_HANDLE);
+    605              APP_FLAG_CLEAR(START_READ_RX_CHAR_HANDLE); 
+    606              APP_FLAG_CLEAR(END_READ_RX_CHAR_HANDLE); 
+    607              
+    608              APP_FLAG_CLEAR2(START_READ_TX_CHAR_HANDLE);
+    609              APP_FLAG_CLEAR2(END_READ_TX_CHAR_HANDLE);
+    610              APP_FLAG_CLEAR2(START_READ_RX_CHAR_HANDLE); 
+    611              APP_FLAG_CLEAR2(END_READ_RX_CHAR_HANDLE); 
+    612          }
+    613          
+    614          /**
+    615            * @brief  This function is called when there is a notification from the sever.
+    616            * @param  attr_handle Handle of the attribute
+    617            * @param  attr_len    Length of attribute value in the notification
+    618            * @param  attr_value  Attribute value in the notification
+    619            * @retval None
+    620            */
+    621          void GATT_Notification_CB(uint16_t attr_handle, uint8_t attr_len, uint8_t *attr_value)
+    622          {
+    623          #if THROUGHPUT_TEST && CLIENT
+    624              static tClockTime time, time2;
+    625              static int packets=0;     
+    626              
+    627              if(attr_handle == tx_handle+1){ 
+    628                  if(packets==0){
+    629                      printf("Test start\n");
+    630                      time = Clock_Time();
+    631                  }
+    632                  
+    633                  for(int i = 0; i < attr_len; i++)
+    634                      printf("%c", attr_value[i]);
+    635                  
+    636                  packets++;
+    637                  
+    638                  if(packets == NUM_PACKETS){
+    639                      time2 = Clock_Time();
+    640                      tClockTime diff = time2-time;
+    641                      printf("\n%d packets. Elapsed time: %d ms. App throughput: %.2f kbps.\n", NUM_PACKETS, diff, (float)NUM_PACKETS*20*8/diff);
+    642                  }        
+    643                  
+    644              }
+    645          #elif CLIENT
+    646              //PRINTF("Receiev sth from Server, display it on Client!!\n");
+    647              RTC_TimeShow();
+    648              if(attr_handle == tx_handle+1 || attr_handle == tx_handle2+1){ //display content from both server
+    649                for(int i = 0; i < attr_len; i++)
+    650                    printf("%c", attr_value[i]);
+    651              }
+    652                  
+    653          #endif
+    654          }
+    655          
+    656          void User_Process2(void)
+    657          {
+    658              if(APP_FLAG2(SET_CONNECTABLE)){
+    659                  Make_anotherConnection();
+    660                  APP_FLAG_CLEAR2(SET_CONNECTABLE);
+    661              }
+    662          
+    663          #if REQUEST_CONN_PARAM_UPDATE    
+    664              if(APP_FLAG2(CONNECTED) && !APP_FLAG2(L2CAP_PARAM_UPD_SENT) && Timer_Expired2(&l2cap_req_timer)){
+    665                  aci_l2cap_connection_parameter_update_request(connection2_handle, 8, 16, 0, 600);
+    666                  APP_FLAG_SET2(L2CAP_PARAM_UPD_SENT);
+    667              }
+    668          #endif
+    669              
+    670          #if CLIENT
+    671              
+    672              /* Start TX handle Characteristic discovery if not yet done */
+    673              if (APP_FLAG2(CONNECTED) && !APP_FLAG2(END_READ_TX_CHAR_HANDLE))
+    674              {
+    675                //PRINTF("connection2 is ok, wait for TX\n");
+    676                if (!APP_FLAG2(START_READ_TX_CHAR_HANDLE))
+    677                {
+    678                  /* Discovery TX characteristic handle by UUID 128 bits */
+    679                   PRINTF("Ready to expose TX2!\n");
+    680                   const tHalUint8 charUuid128_TX[16] = {0x66,0x9a,0x0c,0x20,0x00,0x08,0x96,0x9e,0xe2,0x11,0x9e,0xb1,0xe1,0xf2,0x73,0xd9};
+    681                   
+    682                   aci_gatt_discovery_characteristic_by_uuid(connection2_handle, 0x0001, 0xFFFF,UUID_TYPE_128,
+    683                                                             charUuid128_TX);
+    684                   APP_FLAG_SET2(START_READ_TX_CHAR_HANDLE);
+    685                }
+    686              }
+    687              /* Start RX handle Characteristic discovery if not yet done */
+    688              else if (APP_FLAG2(CONNECTED) && !APP_FLAG2(END_READ_RX_CHAR_HANDLE))
+    689              {
+    690                /* Discovery RX characteristic handle by UUID 128 bits */
+    691                if (!APP_FLAG2(START_READ_RX_CHAR_HANDLE))
+    692                {
+    693                  /* Discovery TX characteristic handle by UUID 128 bits */
+    694                  
+    695                   const tHalUint8 charUuid128_RX[16] = {0x66,0x9a,0x0c,0x20,0x00,0x08,0x96,0x9e,0xe2,0x11,0x9e,0xb1,0xe2,0xf2,0x73,0xd9};
+    696                   aci_gatt_discovery_characteristic_by_uuid(connection2_handle, 0x0001, 0xFFFF,UUID_TYPE_128,
+    697                                                             charUuid128_RX);
+    698                   APP_FLAG_SET2(START_READ_RX_CHAR_HANDLE);
+    699                 }
+    700              }
+    701              
+    702              if(APP_FLAG2(CONNECTED) && APP_FLAG2(END_READ_TX_CHAR_HANDLE) && APP_FLAG2(END_READ_RX_CHAR_HANDLE) && !APP_FLAG2(NOTIFICATIONS_ENABLED)){
+    703                  uint8_t client_char_conf_data[] = {0x01, 0x00}; // Enable notifications
+    704                  struct timer t;
+    705                  Timer_Set(&t, CLOCK_SECOND*10);
+    706                  
+    707                  while(aci_gatt_write_charac_descriptor(connection2_handle, tx_handle2+2, 2, client_char_conf_data)==BLE_STATUS_NOT_ALLOWED){ //TX_HANDLE2;
+    708                      // Radio is busy.
+    709                      if(Timer_Expired(&t)) break;
+    710                  }
+    711                  APP_FLAG_SET2(NOTIFICATIONS_ENABLED);
+    712                }
+    713               
+    714          
+    715          #endif  
+    716              
+    717          #if ACCEL_TEST
+    718              //if(APP_FLAG2(CONNECTED) && APP_FLAG2(NOTIFICATIONS_ENABLED))
+    719              {
+    720                AxesRaw_t data;
+    721                status_t response;
+    722                tHalUint8 accdata[20] = {0};
+    723                //get Acceleration data
+    724                response = LIS3DH_GetAccAxesRaw(&data);
+    725                if(response){
+    726                    LIS3DH_ConvAccValue(&data);
+    727                    sprintf(accdata,"2 %5d %5d %5d\n",data.AXIS_X, data.AXIS_Y, data.AXIS_Z);
+    728                    //PRINTF(accdata);
+    729                    struct timer t;
+    730                    Timer_Set(&t, CLOCK_SECOND*10);
+    731                                        
+    732                    while(aci_gatt_update_char_value(chatServHandle2, TXCharHandle2, 0, 20, accdata)==BLE_STATUS_INSUFFICIENT_RESOURCES)
+    733                    {
+    734                      // Radio is busy (buffer full).
+    735                      if(Timer_Expired(&t))
+    736                          break;
+    737                    }
+    738                    Clock_Wait(200);
+    739                }
+    740              }
+    741          #endif
+    742              
+    743             
+    744          }
+    745          
+    746          void User_Process(void)
+    747          {
+    748              if(APP_FLAG(SET_CONNECTABLE)){
+    749                  Make_Connection();
+    750                  APP_FLAG_CLEAR(SET_CONNECTABLE);
+    751              }
+    752          
+    753          #if REQUEST_CONN_PARAM_UPDATE    
+    754              if(APP_FLAG(CONNECTED) && !APP_FLAG(L2CAP_PARAM_UPD_SENT) && Timer_Expired(&l2cap_req_timer)){
+    755                  aci_l2cap_connection_parameter_update_request(connection_handle, 8, 16, 0, 600);
+    756                  APP_FLAG_SET(L2CAP_PARAM_UPD_SENT);
+    757              }
+    758          #endif
+    759              
+    760          #if CLIENT
+    761              
+    762              /* Start TX handle Characteristic discovery if not yet done */
+    763              if (APP_FLAG(CONNECTED) && !APP_FLAG(END_READ_TX_CHAR_HANDLE))
+    764              {
+    765                if (!APP_FLAG(START_READ_TX_CHAR_HANDLE))
+    766                {
+    767                  /* Discovery TX characteristic handle by UUID 128 bits */
+    768                  
+    769                   const tHalUint8 charUuid128_TX[16] = {0x66,0x9a,0x0c,0x20,0x00,0x08,0x96,0x9e,0xe2,0x11,0x9e,0xb1,0xe1,0xf2,0x73,0xd9};
+    770                   
+    771                   aci_gatt_discovery_characteristic_by_uuid(connection_handle, 0x0001, 0xFFFF,UUID_TYPE_128,
+    772                                                             charUuid128_TX);
+    773                   APP_FLAG_SET(START_READ_TX_CHAR_HANDLE);
+    774                }
+    775              }
+    776              /* Start RX handle Characteristic discovery if not yet done */
+    777              else if (APP_FLAG(CONNECTED) && !APP_FLAG(END_READ_RX_CHAR_HANDLE))
+    778              {
+    779                /* Discovery RX characteristic handle by UUID 128 bits */
+    780                if (!APP_FLAG(START_READ_RX_CHAR_HANDLE))
+    781                {
+    782                  /* Discovery TX characteristic handle by UUID 128 bits */
+    783                  
+    784                   const tHalUint8 charUuid128_RX[16] = {0x66,0x9a,0x0c,0x20,0x00,0x08,0x96,0x9e,0xe2,0x11,0x9e,0xb1,0xe2,0xf2,0x73,0xd9};
+    785                   aci_gatt_discovery_characteristic_by_uuid(connection_handle, 0x0001, 0xFFFF,UUID_TYPE_128,
+    786                                                             charUuid128_RX);
+    787                   APP_FLAG_SET(START_READ_RX_CHAR_HANDLE);
+    788                 }
+    789              }
+    790              
+    791              if(APP_FLAG(CONNECTED) && APP_FLAG(END_READ_TX_CHAR_HANDLE) && APP_FLAG(END_READ_RX_CHAR_HANDLE) && !APP_FLAG(NOTIFICATIONS_ENABLED)){
+    792                  uint8_t client_char_conf_data[] = {0x01, 0x00}; // Enable notifications
+    793                  struct timer t;
+    794                  Timer_Set(&t, CLOCK_SECOND*10);
+    795                  
+    796                  while(aci_gatt_write_charac_descriptor(connection_handle, tx_handle+2, 2, client_char_conf_data)==BLE_STATUS_NOT_ALLOWED){ //TX_HANDLE;
+    797                      // Radio is busy.
+    798                      if(Timer_Expired(&t)) break;
+    799                  }
+    800                  APP_FLAG_SET(NOTIFICATIONS_ENABLED);
+    801                }    
+    802             
+    803          #endif
+    804              
+    805          #if ACCEL_TEST
+    806              //if(APP_FLAG(CONNECTED) && APP_FLAG(NOTIFICATIONS_ENABLED))
+    807              {
+    808                AxesRaw_t data;
+    809                status_t response;
+    810                tHalUint8 accdata[20] = {0};
+    811                //get Acceleration data
+    812                response = LIS3DH_GetAccAxesRaw(&data);
+    813                if(response){
+    814                    LIS3DH_ConvAccValue(&data);
+    815                    sprintf(accdata,"1 %5d %5d %5d\n",data.AXIS_X, data.AXIS_Y, data.AXIS_Z);
+    816                    //PRINTF(accdata);
+    817                    struct timer t;
+    818                    Timer_Set(&t, CLOCK_SECOND*10);
+    819                                        
+    820                    while(aci_gatt_update_char_value(chatServHandle, TXCharHandle, 0, 20, accdata)==BLE_STATUS_INSUFFICIENT_RESOURCES)
+    821                    {
+    822                      // Radio is busy (buffer full).
+    823                      if(Timer_Expired(&t))
+    824                          break;
+    825                    }
+    826                    Clock_Wait(200);
+    827                }
+    828              }
+    829          #endif 
+    830              
+    831          
+    832          #if THROUGHPUT_TEST && SERVER
+    833              
+    834              static uint8_t test_done = FALSE;
+    835              
+    836              if(APP_FLAG(CONNECTED) && !test_done && APP_FLAG(NOTIFICATIONS_ENABLED)){
+    837              
+    838                  tHalUint8 data[20] = {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F','G','H','I','J'};
+    839                  
+    840                  static tClockTime time, time2;
+    841                  time = Clock_Time();
+    842                  
+    843                  for(int i = 0; i < NUM_PACKETS; i++){
+    844                      
+    845                      struct timer t;
+    846                      Timer_Set(&t, CLOCK_SECOND*10);
+    847                                      
+    848                      while(aci_gatt_update_char_value(chatServHandle, TXCharHandle, 0, 20, data)==BLE_STATUS_INSUFFICIENT_RESOURCES)
+    849                      {
+    850                        // Radio is busy (buffer full).
+    851                        if(Timer_Expired(&t))
+    852                            break;
+    853                      }
+    854                  
+    855                  }
+    856                  
+    857                  time2 = Clock_Time();
+    858                  tClockTime diff = time2-time;
+    859                  printf("\n%d packets. Elapsed time: %d ms. App throughput: %.2f kbps.\n", NUM_PACKETS, diff, (float)NUM_PACKETS*20*8/diff);
+    860                  
+    861                  test_done = TRUE;
+    862              }
+    863          #endif
+    864              
+    865          }
+    866          
+    867          /**
+    868            * @brief  This function is called whenever there is an ACI event to be processed.
+    869            * @note   Inside this function each event must be identified and correctly
+    870            *         parsed.
+    871            * @param  pckt  Pointer to the ACI packet
+    872            * @retval None
+    873            */
+    874          void HCI_Event_CB(void *pckt)
+    875          {
+    876              hci_uart_pckt *hci_pckt = pckt;
+    877              hci_event_pckt *event_pckt = (hci_event_pckt*)hci_pckt->data;
+    878              
+    879              if(hci_pckt->type != HCI_EVENT_PKT)
+    880                  return;
+    881              
+    882              switch(event_pckt->evt){
+    883                  
+    884              case EVT_DISCONN_COMPLETE:
+    885                  {
+    886                      GAP_DisconnectionComplete_CB();
+    887                  }
+    888                  break;
+    889                  
+    890              case EVT_LE_META_EVENT:
+    891                  {
+    892                      evt_le_meta_event *evt = (void *)event_pckt->data;
+    893                      
+    894                      switch(evt->subevent){
+    895                      case EVT_LE_CONN_COMPLETE:
+    896                          {
+    897                              evt_le_connection_complete *cc = (void *)evt->data;
+    898                              GAP_ConnectionComplete_CB(cc->peer_bdaddr, cc->handle);
+    899                          }
+    900                          break;
+    901                      }
+    902                  }
+    903                  break;
+    904                  
+    905              case EVT_VENDOR:
+    906                  {
+    907                      evt_blue_aci *blue_evt = (void*)event_pckt->data;
+    908                      switch(blue_evt->ecode){
+    909                          
+    910                      case EVT_BLUE_GATT_ATTRIBUTE_MODIFIED:
+    911                          {
+    912                              evt_gatt_attr_modified *evt = (evt_gatt_attr_modified*)blue_evt->data;
+    913                              Attribute_Modified_CB(evt->attr_handle, evt->data_length, evt->att_data);                    
+    914                          }
+    915                          break;
+    916                      case EVT_BLUE_GATT_NOTIFICATION:
+    917                          {
+    918                              evt_gatt_attr_notification *evt = (evt_gatt_attr_notification*)blue_evt->data;
+    919                              GATT_Notification_CB(evt->attr_handle, evt->data_length - 2, evt->attr_value);
+    920                          }
+    921                          break;
+    922                       case EVT_BLUE_L2CAP_CONN_UPD_RESP:
+    923                          {
+    924                              evt_l2cap_conn_upd_resp *resp = (void*)blue_evt->data;
+    925                              if(resp->result){
+    926                                  PRINTF("> Connection parameters rejected.\n");
+    927                              }
+    928                              else{
+    929                                  PRINTF("> Connection parameters accepted.\n");
+    930                              }
+    931                          }
+    932                          break;
+    933          #ifdef CLIENT            
+    934                        case EVT_BLUE_GATT_DISC_READ_CHAR_BY_UUID_RESP:
+    935                          {
+    936                              evt_gatt_disc_read_char_by_uuid_resp *resp = (void*)blue_evt->data;
+    937                              
+    938                              if (APP_FLAG(START_READ_TX_CHAR_HANDLE) && !APP_FLAG(END_READ_TX_CHAR_HANDLE))
+    939                              {
+    940                                tx_handle = resp->attr_handle;
+    941                                PRINTF("TX Char Handle %04X\n", tx_handle);
+    942                              }
+    943                              else if (APP_FLAG(START_READ_RX_CHAR_HANDLE) && !APP_FLAG(END_READ_RX_CHAR_HANDLE))
+    944                              {
+    945                                rx_handle = resp->attr_handle;
+    946                                PRINTF("RX Char Handle %04X\n", rx_handle);
+    947                              }
+    948                              PRINTF("Receive sth is %04X\n",resp->attr_handle);
+    949                              //server_2 process
+    950                              if (APP_FLAG2(START_READ_TX_CHAR_HANDLE) && !APP_FLAG2(END_READ_TX_CHAR_HANDLE))
+    951                              {
+    952                                tx_handle2 = resp->attr_handle;
+    953                                PRINTF("TX2 Char2 Handle2 %04X\n", tx_handle2);
+    954                              }
+    955                              else if (APP_FLAG2(START_READ_RX_CHAR_HANDLE) && !APP_FLAG2(END_READ_RX_CHAR_HANDLE))
+    956                              {
+    957                                rx_handle2 = resp->attr_handle;
+    958                                PRINTF("RX2 Char2 Handle2 %04X\n", rx_handle2);
+    959                              }
+    960                          }
+    961                          break;  
+    962                          
+    963                          case EVT_BLUE_GATT_PROCEDURE_COMPLETE:
+    964                          {
+    965                            /* Wait for gatt procedure complete event trigger related to Discovery Charac by UUID */
+    966                            //evt_gatt_procedure_complete *pr = (void*)blue_evt->data;
+    967                            
+    968                            if (APP_FLAG(START_READ_TX_CHAR_HANDLE) && !APP_FLAG(END_READ_TX_CHAR_HANDLE))
+    969                            {
+    970                              APP_FLAG_SET(END_READ_TX_CHAR_HANDLE);
+    971                            }
+    972                            else if (APP_FLAG(START_READ_RX_CHAR_HANDLE) && !APP_FLAG(END_READ_RX_CHAR_HANDLE))
+    973                            {
+    974                              APP_FLAG_SET(END_READ_RX_CHAR_HANDLE);
+    975                            }
+    976                            
+    977                            if (APP_FLAG2(START_READ_TX_CHAR_HANDLE) && !APP_FLAG2(END_READ_TX_CHAR_HANDLE))
+    978                            {
+    979                              APP_FLAG_SET2(END_READ_TX_CHAR_HANDLE);
+    980                            }
+    981                            else if (APP_FLAG2(START_READ_RX_CHAR_HANDLE) && !APP_FLAG2(END_READ_RX_CHAR_HANDLE))
+    982                            {
+    983                              APP_FLAG_SET2(END_READ_RX_CHAR_HANDLE);
+    984                            }
+    985                          }
+    986                          break;
+    987          #endif         
+    988                      }
+    989                  }
+    990                  break;
+    991              }
+    992              
+    993          }
+    994          
+    995          
+    996          #ifdef USE_FULL_ASSERT
+    997          /*******************************************************************************
+    998          * Function Name  : assert_failed
+    999          * Description    : Reports the name of the source file and the source line number
+   1000          *                  where the assert_param error has occurred.
+   1001          * Input          : - file: pointer to the source file name
+   1002          *                  - line: assert_param error line source number
+   1003          * Output         : None
+   1004          * Return         : None
+   1005          *******************************************************************************/
+   1006          void assert_failed(uint8_t* file, uint32_t line)
+   1007          {
+   1008              /* User can add his own implementation to report the file name and line number,
+   1009              ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+   1010              
+   1011              /* Infinite loop */
+   1012              while (1)
+   1013              {}
+   1014          }
+   1015          #endif
+   1016          
+   1017          /******************* (C) COPYRIGHT 2014 STMicroelectronics *****END OF FILE****/
+   1018          /** \endcond
+   1019           */
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+      16   GAP_ConnectionComplete_CB
+         0   -> printf
+        16   -> printf
+       8   GAP_DisconnectionComplete_CB
+         8   -> printf
+       0   GATT_Notification_CB
+       0   HCI_Event_CB
+         0   -> Attribute_Modified_CB
+         0   -> GAP_ConnectionComplete_CB
+         0   -> GAP_DisconnectionComplete_CB
+         0   -> printf
+       8   Init_Accelerometer
+         8   -> LIS3DH_GetWHO_AM_I
+         8   -> LIS3DH_Int1LatchEnable
+         8   -> LIS3DH_Interrupts_Config
+         8   -> LIS3DH_ResetInt1Latch
+         8   -> LIS3DH_SetAxis
+         8   -> LIS3DH_SetFullScale
+         8   -> LIS3DH_SetInt1Duration
+         8   -> LIS3DH_SetInt1Threshold
+         8   -> LIS3DH_SetInt2Pin
+         8   -> LIS3DH_SetIntConfiguration
+         8   -> LIS3DH_SetMode
+         8   -> LIS3DH_SetODR
+         8   -> LIS3DH_SpiInit
+         8   -> printf
+      56   Make_Connection
+        56   -> aci_gap_set_discoverable
+        56   -> hci_le_set_scan_resp_data
+        56   -> printf
+      56   Make_anotherConnection
+        56   -> aci_gap_set_discoverable
+        56   -> hci_le_set_scan_resp_data
+        56   -> printf
+      64   User_Process
+        64   -> Clock_Wait
+        64   -> LIS3DH_ConvAccValue
+        64   -> LIS3DH_GetAccAxesRaw
+        64   -> Timer_Expired
+        64   -> Timer_Set
+        64   -> aci_gap_set_discoverable
+        64   -> aci_gatt_update_char_value
+        64   -> hci_le_set_scan_resp_data
+        64   -> printf
+        64   -> sprintf
+      64   User_Process2
+        64   -> Clock_Wait
+        64   -> LIS3DH_ConvAccValue
+        64   -> LIS3DH_GetAccAxesRaw
+        64   -> Timer_Expired
+        64   -> Timer_Set
+        64   -> aci_gap_set_discoverable
+        64   -> aci_gatt_update_char_value
+        64   -> hci_le_set_scan_resp_data
+        64   -> printf
+        64   -> sprintf
+      80   main
+        80   -> Add_Chat_Service
+        80   -> BlueNRG_RST
+        80   -> Clock_Init
+        80   -> Clock_Wait
+        80   -> EXTI_ClearITPendingBit
+        80   -> FLASH_SLEEPPowerDownCmd
+        80   -> HCI_Init
+        80   -> HCI_Process
+        80   -> Init_Accelerometer
+        80   -> Init_GPIOs
+        80   -> LIS3DH_ConvAccValue
+        80   -> LIS3DH_GetAccAxesRaw
+        80   -> NVIC_PriorityGroupConfig
+        80   -> NVIC_SetVectorTable
+        80   -> PWR_FastWakeUpCmd
+        80   -> PWR_PVDCmd
+        80   -> PWR_RTCAccessCmd
+        80   -> PWR_UltraLowPowerCmd
+        80   -> RCC_APB1PeriphClockCmd
+        80   -> RCC_Configuration
+        80   -> RCC_GetFlagStatus
+        80   -> RTC_ClearFlag
+        80   -> RTC_Config
+        80   -> RTC_Init
+        80   -> RTC_ReadBackupRegister
+        80   -> RTC_TimeRegulate
+        80   -> RTC_TimeShow
+        80   -> RTC_WaitForSynchro
+        80   -> SdkEvalGetVersion
+        80   -> SdkEvalIdentification
+        80   -> SdkEvalSpiInit
+        80   -> SdkEval_IO_Config
+        80   -> Timer_Expired
+        80   -> Timer_Set
+        80   -> aci_gap_init
+        80   -> aci_gap_set_auth_requirement
+        80   -> aci_gap_set_discoverable
+        80   -> aci_gatt_init
+        80   -> aci_gatt_update_char_value
+        80   -> aci_hal_set_tx_power_level
+        80   -> aci_hal_write_config_data
+        80   -> hci_le_set_scan_resp_data
+        80   -> printf
+        80   -> sprintf
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       8  ?<Constant "%02X-">
+       4  ?<Constant "%d\n">
+       2  ?<Constant ".">
+      16  ?<Constant "1 %5d %5d %5d\n">
+      16  ?<Constant "2 %5d %5d %5d\n">
+      36  ?<Constant "> Connection paramete...">
+      36  ?<Constant "> Connection paramete...">_1
+      28  ?<Constant "Accelerometer Initial...">
+      24  ?<Constant "BLE Stack Initialized.\n">
+      24  ?<Constant "Connected to device:">
+      16  ?<Constant "Disconnected\n">
+      20  ?<Constant "GAP_Init failed.\n">
+      20  ?<Constant "GATT_Init failed.\n">
+      28  ?<Constant "General Discoverable ...">
+      28  ?<Constant "LIS_WHO_AM_I_ADDR: %02X\n">
+      44  ?<Constant "No backup register fo...">
+      48  ?<Constant "SERVER: BLE Stack Ini...">
+      28  ?<Constant "Setting BD_ADDR failed.\n">
+      64  ?<Constant "\n\r        /!\\***** RT...">
+      36  ?<Constant "\n\r No need to configu...">
+      36  ?<Constant "\ntotoal connection %d...">
+      36  ?<Constant "\r\n External Reset occ...">
+      36  ?<Constant "\r\n Power On Reset occ...">
+      20  ?<Constant {0}>
+      20  ?<Constant {0}>_1
+       8  ?<Constant {170, 0, 0, 225, 128, 2}>
+      16  ?<Constant {9, 66, 108, 117, 101, 78, 82, 71,
+      16  ?<Constant {9, 66, 108, 117, 101, 78, 82, 71, _1
+       4  ??DataTable31
+       4  ??DataTable33
+       4  ??DataTable34
+       4  ??DataTable34_1
+       4  ??DataTable34_10
+       4  ??DataTable34_11
+       4  ??DataTable34_2
+       4  ??DataTable34_3
+       4  ??DataTable34_4
+       4  ??DataTable34_5
+       4  ??DataTable34_6
+       4  ??DataTable34_7
+       4  ??DataTable34_8
+       4  ??DataTable34_9
+     130  GAP_ConnectionComplete_CB
+     136  GAP_DisconnectionComplete_CB
+       2  GATT_Notification_CB
+      96  HCI_Event_CB
+      92  Init_Accelerometer
+      74  Make_Connection
+      74  Make_anotherConnection
+     196  User_Process
+     196  User_Process2
+      20  connection_handle
+          connection2_handle
+          app_flags
+          app2_flags
+          connection_num
+          bServerConnected
+       8  l2cap_req_timer
+     630  main
+
+ 
+     8 bytes in section .bss
+    20 bytes in section .data
+    26 bytes in section .rodata
+ 2 370 bytes in section .text
+ 
+ 2 370 bytes of CODE  memory
+    26 bytes of CONST memory
+    28 bytes of DATA  memory
+
+Errors: none
+Warnings: 3
